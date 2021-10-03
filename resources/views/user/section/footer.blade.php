@@ -69,7 +69,7 @@
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						GET IN TOUCH
+					{{__('trans.getInTouch')}}
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
