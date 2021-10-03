@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468
+class ComposerStaticInit4f82c9d5a08017453ffa7e2252a45d09
 {
     public static $files = array (
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
@@ -617,6 +617,7 @@ class ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468
         'App\\Models\\Admin' => __DIR__ . '/../..' . '/app/Models/Admin.php',
         'App\\Models\\Blog' => __DIR__ . '/../..' . '/app/Models/Blog.php',
         'App\\Models\\BlogTranslation' => __DIR__ . '/../..' . '/app/Models/BlogTranslation.php',
+        'App\\Models\\Cart' => __DIR__ . '/../..' . '/app/Models/Cart.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\CategoryTranslation' => __DIR__ . '/../..' . '/app/Models/CategoryTranslation.php',
         'App\\Models\\Crude' => __DIR__ . '/../..' . '/app/Models/Crude.php',
@@ -630,7 +631,6 @@ class ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\SliderTranslation' => __DIR__ . '/../..' . '/app/Models/SliderTranslation.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
-        'App\\Models\\cart' => __DIR__ . '/../..' . '/app/Models/cart.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -786,7 +786,6 @@ class ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468
         'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
         'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
         'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
@@ -5110,6 +5109,7 @@ class ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
+        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcherInterface.php',
@@ -5490,6 +5490,7 @@ class ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468
         'Symfony\\Component\\Routing\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/GlobFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ObjectLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectLoader.php',
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
+        'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/XmlFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/YamlFileLoader.php',
         'Symfony\\Component\\Routing\\Matcher\\CompiledUrlMatcher' => __DIR__ . '/..' . '/symfony/routing/Matcher/CompiledUrlMatcher.php',
@@ -5872,10 +5873,10 @@ class ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit9180e02efefcc303f5d7ba4ce2fa4468::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit4f82c9d5a08017453ffa7e2252a45d09::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit4f82c9d5a08017453ffa7e2252a45d09::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit4f82c9d5a08017453ffa7e2252a45d09::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit4f82c9d5a08017453ffa7e2252a45d09::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -23,7 +23,9 @@ return[
     'Category' => 'श्रेणी',
     'Product' => '
     उत्पादन',
-    'dashboard' => 'ड्यासबोर्ड'
+    'dashboard' => 'ड्यासबोर्ड',
+    "Shopnow" => "Neapli Shop now"
+
 
 ];
 
