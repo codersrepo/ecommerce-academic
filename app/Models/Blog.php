@@ -13,4 +13,9 @@ class Blog extends Model implements TranslatableContract
         use  Translatable;
         protected $guarded = ['id'];
         public $translatedAttributes = ['title', 'summary','description'];
+
+        public function scopeCorrectTranslation($q)
+        {
+            return $q->where('language_id', session('language_id'));
+        }
     }

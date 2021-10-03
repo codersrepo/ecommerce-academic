@@ -1,5 +1,6 @@
 <?php
 return[
+    'default' => "नेपाली",
     'title' => 'Nepali Title',
     'slider' => 'स्लाइडर',
     'blog' => 'ब्लग',
@@ -7,7 +8,7 @@ return[
     'Slider' => 'स्लाइडर',
     'Blog' => 'ब्लग',
     'Shop' => 'पसल',
-    'Features' => 'विशेषताहरु',
+    'FEATURED' => 'विशेषताहरु',
     'About' => 'हाम्रोबारे',
     'Contact' => 'सम्पर्क',
     'Store Overview' => 'स्टोर सिंहावलोकन',
@@ -19,6 +20,11 @@ return[
     'Status' => 'स्थिति',
     'Date' => 'मिति',
     'Featured' => 'चित्रित',
+    'Category' => 'श्रेणी',
+    'Product' => '
+    उत्पादन',
+    'dashboard' => 'ड्यासबोर्ड'
+
 ];
 
 ?>

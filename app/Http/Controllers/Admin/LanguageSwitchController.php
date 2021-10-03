@@ -8,9 +8,17 @@ use App\Http\Controllers\Controller;
 
 class LanguageSwitchController extends Controller
 {
-    public function __invoke($locale){
-        App::setlocale($locale);
-        session()->put('locale',$locale);
-        return redirect()->back();
+    // public function __invoke($locale){
+    //     App::setlocale($locale);
+    //     session()->put('locale',$locale);
+    //     return redirect()->back();
+    // }
+    public function __invoke(String $lang)
+    {
+    if (in_array($lang, ['en', 'np', 'hi'])) {
+        session(['locale' => $lang]);
     }
+    return back();
+}
+
 }

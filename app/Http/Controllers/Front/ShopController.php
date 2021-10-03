@@ -9,41 +9,74 @@ use App\Http\Controllers\Controller;
 
 class ShopController extends Controller
 {
-    public function index(){
-        $product = Product::translatedIn(app()->getLocale())
-        ->latest()
-        ->take(10)
-        ->get();
+    protected $product;
+    protected $category;
 
-        $category = Category::translatedIn(app()->getLocale())
-        ->with('products')
-        ->latest()
-        ->take(3)
-        ->get();
+
+    public function __construct(Product $product, Category $category)
+    {
+        $this->product = $product;
+        $this->category = $category;
+    }
+
+
+    public function index(Request $request){
+        $product = $this->product
+            ->active()
+            ->when($request->q, function ($q, $title) {
+                $q->whereHas('translations', function ($q) use ($title) {
+                    $q->correctTranslation()->where('title', 'LIKE', "%{$title}%");
+                });
+            })
+            ->when($request->category, function ($q, $category) {
+                $q->whereHas('category', function ($q) use ($category) {
+                    $q->active()->where('slug', $category);
+                });
+            })
+            ->latest()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation()->select(['title', 'product_id']);
+            }])
+            ->paginate(9);
+
+        $category = $this->category->active()
+            ->latest()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation()->select(['title', 'category_id']);
+            }])
+            ->get();
+
+        // $featured_products = $this->product->active()
+        //     ->where('is_featured', 1)
+        //     ->with(['translations' => function ($q) {
+        //         $q->correctTranslation()->select(['title', 'product_id']);
+        //     }])
+        //     ->get();
+
         return view('user.shop.index', compact(['category', 'product']));
 
     }
 
     public function show($slug){
-        $product_data =   Product::translatedIn(app()->getLocale())
-        ->where('slug', $slug)
-        ->with('category')
-        ->with(['images'])
-        // ->whereHas('categories', function ($query) use ($product_data->id) {
-            //     $query->where('categories.id', $id);
-            // })
-            ->where('status','=', 'active')
+        $products =  $this->product->active()
+        ->with('images')
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation();
+            }])->where('slug', $slug)
             ->first();
 
+        $related_product =  $this->product->active()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation()->select(['title', 'product_id']);
+            }])
+            ->where('id', '!=', $products->id)
+            ->take(6)
+            ->get();
 
-        $related_product =  Product::translatedIn(app()->getLocale())
-                        ->get()
-                        //  ->where('id','!=',$product_data->id)
-                         ->take(6);
 
         return view('user.Shop.show')
                                     ->with('related_product',$related_product)
-                                    ->with('product_data',$product_data);
+                                    ->with('product_data',$products);
     }
 }
 

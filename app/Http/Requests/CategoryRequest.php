@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
+use App\Models\Language;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,21 +26,26 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        $locale = config('translatable.locale');
-        $rules = [
-            'en.title' => 'required',
-            'en.summary' => 'required',
-            'en.description' => 'required',
-            'image' => 'required',
-            'status' => 'required',
-            'slug' => 'string'
-        ];
 
-        foreach(config('translatable.locales') as $locale){
-            $rules[$locale.'.title'] = 'string';
-            $rules[$locale.'.summary'] = 'string';
-            $rules[$locale.'.description'] = 'string';
-            }
-            return $rules;
+        $rules = $this->prepareRulesForMultiTrans();
+
+        return array_merge($rules, [
+                'status' => ['required', 'string', Rule::in(Category::STATUS)],
+                'image' => ['required'],
+            ]);
+        }
+    
+        protected function prepareRulesForMultiTrans()
+        {
+            $languages = Language::get(['prefix']);
+    
+            $rules = $languages->map(function ($lang) {
+                $isLangEnglish = $lang->prefix === 'en';
+                return [
+                    'title_' . $lang->prefix => ['required', 'string', 'max:' . ($isLangEnglish ? 200 : 300)],
+                    'summary_' . $lang->prefix => ['required', 'string', 'max:' . ($isLangEnglish ? 300 : 500)],
+                ];
+            });
+            return array_merge(...$rules);
+        }
     }
-}

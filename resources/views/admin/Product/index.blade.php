@@ -37,8 +37,8 @@
                                                     @endforeach
                                                     @endif  --}}
 
-                                        <td>{{ $data_indiv->title }} </td>
-                                        <td>{{ \Illuminate\Support\Str::limit($data_indiv->summary, 30) }} </td>
+                                        <td>{{ $data_indiv->firstTranslation()->title }} </td>
+                                        <td>{{ \Illuminate\Support\Str::limit($data_indiv->firstTranslation()->summary, 30) }} </td>
                                         <td>{{ $data_indiv->size }} </td>
                                         <td>{{ $data_indiv->price }} </td>
                                         <td>{{ $data_indiv->colour }} </td>

@@ -11,7 +11,8 @@
                 <ul class="side-menu metismenu">
                     <li>
                         <a class="active" href="index.html"><i class="sidebar-item-icon fa fa-th-large"></i>
-                            <span class="nav-label">{{ (__('trans.Dashboard')) }}</span>
+                            <span class="nav-label">
+                                {{ __("trans.dashboard") }}
                         </a>
                     </li>
                     <li class="heading">{{ (__('trans.FEATURED')) }}</li>
@@ -33,7 +34,7 @@
                     </li>
                     <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-edit"></i>
-                            <span class="nav-label">Category</span><i class="fa fa-angle-left arrow"></i></a>
+                            <span class="nav-label">{{ (__('trans.Category')) }}</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
                                 <a href="{{ route('category.create') }}">Add Category</a>
@@ -45,7 +46,7 @@
                     </li>
                     <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
-                            <span class="nav-label">Product</span><i class="fa fa-angle-left arrow"></i></a>
+                            <span class="nav-label">{{ (__('trans.Product')) }}</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
                             <a href="{{ route('product.create') }}">Add Product</a>
@@ -65,6 +66,18 @@
                             </li>
                             <li>
                                 <a href="{{ route('blog.index') }}"> {{ (__('trans.List blog')) }}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
+                            <span class="nav-label">{{ (__('trans.Facility')) }}</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                            <a href="{{ route('facilities.create') }}">{{ (__('trans.Add Facility')) }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('facilities.index') }}"> {{ (__('trans.List Facility')) }}</a>
                             </li>
                         </ul>
                     </li>

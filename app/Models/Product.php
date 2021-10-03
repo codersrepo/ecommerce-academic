@@ -4,24 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
+use App\Models\ProductTranslation;
+use App\Traits\HasSeo;
+use App\Traits\HasStatus;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model implements TranslatableContract
+
+
+class Product extends Model
 {
-    use  Translatable,HasFactory;
-    protected $guarded = ['id'];
-    public $translatedAttributes = ['title', 'summary','description','product_color','price','brand_name','discount_percent','stock'];
+    use HasStatus, SoftDeletes;
 
-    protected $casts = [
-        'properties' => 'array'
+    const STATUS = ['active', 'inactive'];
+
+    protected $fillable = [
+        'status',
+        'slug',
+        // 'is_featured',
+        'category_id',
+        'price',
+        'size',
+        'product_code',
+        'colour',
+        'image_icon'
     ];
-
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 
 
     public function cart()
@@ -31,10 +37,57 @@ class Product extends Model implements TranslatableContract
 
         public function images()
     {
-        return $this->hasMany(ProductImages::class);
+        return $this->hasMany(ProductImage::class);
     }
 
-    // protected $casts = [
-    //     'images' => 'array',
-    // ];
-}
+
+    protected $casts = [
+        'images' => 'array',
+    ];
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    // public function sendSubscribersNotification()
+    // {
+    //     dispatch(new SendProductAddedEmail($this));
+    // }
+
+    public function translations()
+    {
+        return $this->hasMany(ProductTranslation::class, 'product_id', 'id');
+    }
+
+    public function belongsToCategory(Category $category)
+    {
+        return $this->category_id == $category->id;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        // static::creating(function (Product $product) {
+        //     $product['created_by'] = auth()->id();
+        // });
+
+        static::deleting(function (Product $product) {
+            $product->setToInactive();
+        });
+    }
+
+    public function firstTranslation()
+    {
+        return $this->translations[0];
+    }
+
+    public function getFromTranslations($prop, $lang_id)
+    {
+        if (!$this->id) {
+            return;
+        }
+        return $this->translations->where('language_id', $lang_id)->first()->{$prop};
+    }}

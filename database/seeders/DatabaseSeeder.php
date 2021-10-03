@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(AdminTableSeeder::class);
-        $this->call(CategorySeeder::class);
-        $this->call(ProductTableSeeder::class);
-        $this->call(ImageTableSeeder::class);
-        $this->call(SliderTableSeeder::class);
+        $this->call(LanguageTableSeeder::class);
+        // $this->call(CategorySeeder::class);
+        // $this->call(ProductTableSeeder::class);
+        // $this->call(ImageTableSeeder::class);
+        // $this->call(SliderTableSeeder::class);
     }
 }

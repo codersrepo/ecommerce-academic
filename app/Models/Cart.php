@@ -17,12 +17,10 @@ class Cart extends Model
     public static function userCartItem(){
         if(Auth::check()){
             $userCartItem = Cart::with(['product'])->where('user_id',Auth::user()->id)->get()->toArray();
-        } else {
-            $userCartItem = Cart::with(['product'])->where('session_id' , Session::get('session_id'))->get()->toArray();
+            return $userCartItem;
         }
-        return $userCartItem;
     }
-
+       
     public function product(){
     return  $this->belongsTo(Product::class);
     }

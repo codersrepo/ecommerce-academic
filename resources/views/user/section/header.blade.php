@@ -34,13 +34,14 @@
                             Login
                         </a>
                     @endauth
+					@if(app()->getLocale() !== 'en')
+                        <li><a href="{{ route('sub_front.home', ['locale' => 'en']) }}">English</a></li>
+                        @endif
 
-                         @foreach (config('translatable.locales') as $locale)
-                             <a href="{{ request()->url() }}?language={{ $locale }}"
-                                class="@if (app()->getLocale() == $locale) border-indigo-400 @endif flex-c-m trans-04 p-lr-25">
-                                 {{ strtoupper($locale) }}
-                             </a>
-                          @endforeach
+                        @if(app()->getLocale() !== 'np')
+                        <li><a href="{{ route('sub_front.home', ['locale' => 'np']) }}">नेपाली</a></li>
+                        @endif
+
 					</div>
 				</div>
 			</div>
@@ -60,7 +61,7 @@
 							</li>
 
 							<li>
-								<a href="{{ route('shop.index') }}">{{ (__('trans.Shop')) }}</a>
+								<a href="{{ route('front.shop.index') }}">{{ (__('trans.Shop')) }}</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
@@ -68,7 +69,7 @@
 							</li>
 
 							<li>
-								<a href="{{ route('blogs.index') }}">{{ (__('trans.blog')) }}</a>
+								<a href="{{ route('front.blogs.index') }}">{{ (__('trans.blog')) }}</a>
 							</li>
 
 							<li>
@@ -82,15 +83,15 @@
 					</div>
 
 					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m h-full">
-						<div class="flex-c-m h-full p-r-24">
+					 <div class="wrap-icon-header flex-w flex-r-m h-full">
+						<!--<div class="flex-c-m h-full p-r-24">
 							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
 								<i class="zmdi zmdi-search"></i>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart">
 								<i class="zmdi zmdi-shopping-cart"></i>
 							</div>
 						</div>

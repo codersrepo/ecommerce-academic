@@ -26,16 +26,23 @@
                 <!-- END TOP-LEFT TOOLBAR-->
                 <!-- START TOP-RIGHT TOOLBAR-->
                 <ul class="nav navbar-toolbar">
-                    @foreach (config('translatable.locales') as $locale)
-                    <li class="navbar-nav mr-auto">
-                        <a href="{{ request()->url() }}?language={{ $locale }}"
-                           class="@if (app()->getLocale() == $locale) border-indigo-400 @endif inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out">
-                            {{ strtoupper($locale) }}
-                        </a>
-                    </li>
-                     @endforeach
-                    {{-- {{ dd(app()->getlocale()) }} --}}
-                    <li class="dropdown dropdown-user">
+                <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-language"></i>
+                <span id="lang_title">{{ __('trans.default') }}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="{{ route('switch-lang', 'en') }}"
+                    class="lang-option dropdown-item {{ session('locale') =='en' ? 'active' : '' }}">
+                    English
+                </a>
+                <a href="{{ route('switch-lang', 'np') }}"
+                    class="lang-option dropdown-item {{ session('locale') =='np' ? 'active' : '' }}">
+                    नेपाली
+                </a>
+            </div>
+        </li>
+                <li class="dropdown dropdown-user">
                         <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                             <i class="fa-user-circle"></i>
                             {{-- <img src="./assets/img/admin-avatar.png" /> --}}

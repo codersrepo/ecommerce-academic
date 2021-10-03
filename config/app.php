@@ -122,6 +122,8 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+    'domain_url' => env('DOMAIN_URL', '{locale}.ncit-ecom.test'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -175,6 +177,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        yajra\Datatables\DatatablesServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -229,6 +233,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => 'Intervention\Image\Facades\Image',
+        // 'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Datatables' => \Yajra\DataTables\DataTables::class,
+
 
     ],
 

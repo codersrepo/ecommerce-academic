@@ -14,16 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(['domain' => config('app.domain_url'), 'middleware' => ['front.lang', 'subdomain'], 'namespace' => "Front", 'as' => 'sub_front.'], function () {
+    require base_path('routes/frontend.php');
+});
 
-
-    Route::get('','Front\HomeController');
-    Route::get('product', 'Front\ShopController@index')->name('shop.index');
-    Route::get('product/{id}', 'Front\ShopController@show')->name('shop.show');
-    Route::get('blog', 'Front\BlogController@index')->name('blogs.index');
-    Route::get('blog/{slug}', 'Front\BlogController@show')->name('blogs.show');
-    Route::post('add-to-cart','Front\Cartcontroller@index')->name('addToCart');
-    Route::get('cart','Front\CartController@cart')->name('cart');
-
+Route::group(['middleware' => ['front.lang'], 'namespace' => "Front", 'as' => 'front.'], function () {
+    require base_path('routes/frontend.php');
+});
 
 
     // return view('user.index');
@@ -32,7 +29,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     // admin loginnn
     Route::get('login','AdminLoginController@loginForm')->name('admin.login');
     Route::post('login','AdminLoginController@login')->name('admin.login');
-    Route::group(['middleware' => 'admin'],function(){
+    Route::group(['middleware' => ['admin','lang','bindings']],function(){
+        Route::get('/lang/{lang}', "SwitchLanguageController")->name('switch-lang');
         Route::get('/',function(){
            return view('admin.dashboard');
         });
@@ -43,13 +41,15 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
 
         Route::resource('/blog','BlogController');
 
+        Route::resource('/facilities', 'FacilityController')->except('show');
+        Route::put('facilities/{facility}/toggle-status', 'FacilityController@toggleStatus')->name('facilities.toggle-status');
 
         Route::post('updateBlogStatus','BlogController@togglestatus')->name('updateStatus');
 
         Route::resource('/product','ProductController');
         Route::post('updateProductStatus','ProductController@togglestatus')->name('updateProductStatus');
 
-        Route::get('/{lang}','LanguageSwitchController')->name('switch-lang');
+        // Route::get('/{lang}','LanguageSwitchController')->name('switch-lang');
     });
 });
 

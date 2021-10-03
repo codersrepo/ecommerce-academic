@@ -31,7 +31,6 @@
 		</div>
 	</div>
 
-
 	<!-- Product Detail -->
 	<section class="sec-product-detail bg0 p-t-65 p-b-60">
 		<div class="container">
@@ -42,15 +41,14 @@
 							<div class="wrap-slick3-dots"></div>
 							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 							<div class="slick3 gallery-lb">
-                                @foreach ($product_data->images as $image_data)
-								<div class="item-slick3" data-thumb="{{  asset('images/product_images/large/').'/'.$image_data->images }}">
+                                @foreach ($product_data->images() as $image_data)
+								<div class="item-slick3" data-thumb="{{  asset('images/product_images/large/').$image_data->images }}">
 									<div class="wrap-pic-w pos-relative">
 										<img src="{{ asset('images/product_images/large/').$image_data->images }}" alt="IMG-PRODUCT">
-
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 											<i class="fa fa-expand"></i>
-										</a>
-									</div>
+										</div>
+									</a>
 								</div>
                                 @endforeach
 							</div>
@@ -61,21 +59,21 @@
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            {{ $product_data->title }}
+                            {{ $product_data->firstTranslation()->title }}
 						</h4>
 
 						<span class="mtext-106 cl2">
-                            {{ $product_data->price }}
+                            Rs. {{ $product_data->price }}
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">
-                            {{ $product_data->summary }}
+                            {{ $product_data->firstTranslation()->summary }}
 						</p>
 
                         <!--  -->
 
                         <div class="p-t-33">
-                            <form method="post" action="{{ route('addToCart') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('front.add-to-cart') }}" enctype="multipart/form-data">
                                 @csrf
                             <div class="flex-w flex-r-m p-b-10">
                                 <input type="hidden" name="product_id" value="{{ $product_data['id'] }}" required>
@@ -130,9 +128,18 @@
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
 									</div>
-									<button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" product_name ="{{ $product_data->title }}">
+									<div class="row">
+									<div class="col-xs-5 text-left">
+										<button type="submit" class="flex-c-m stext-101 cl0 size-107 bg1 bor2 hov-btn1 p-lr-15 trans-04 js-addcart-detail" product_name ="{{ $product_data->title }}">
 										Add to cart
+									</button> 
+									</div>
+									<div class="col-xs-5 text-right">
+										<button type="submit" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10" product_name ="{{ $product_data->title }}">
+										Buy Now
 									</button>
+									</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -186,7 +193,7 @@
 						<div class="tab-pane fade show active" id="description" role="tabpanel">
 							<div class="how-pos2 p-lr-15-md">
 								<p class="stext-102 cl6">
-                                    {{ $product_data->description }}
+                                    {{ $product_data->firstTranslation()->description }}
 								</p>
 							</div>
 						</div>
@@ -198,12 +205,12 @@
 									<ul class="p-lr-28 p-lr-15-sm">
 										<li class="flex-w flex-t p-b-7">
 											<span class="stext-102 cl3 size-205">
-												Weight
+												Color Available: 
 											</span>
 
 											<span class="stext-102 cl6 size-206">
-												0.79 kg
-											</span>
+											{{ $product_data->colour }}				
+										</span>
 										</li>
 
 										<li class="flex-w flex-t p-b-7">
@@ -238,12 +245,12 @@
 
 										<li class="flex-w flex-t p-b-7">
 											<span class="stext-102 cl3 size-205">
-												Size
+												SKU :
 											</span>
 
 											<span class="stext-102 cl6 size-206">
-												XL, L, M, S
-											</span>
+												{{ $product_data->product_code }}
+										</span>
 										</li>
 									</ul>
 								</div>
@@ -337,7 +344,7 @@
 			</div>
 		</div>
 
-		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
+		<!-- <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 			<span class="stext-107 cl6 p-lr-25">
 				{{ $product_data->product_code }}
 			</span>
@@ -345,7 +352,7 @@
 			<span class="stext-107 cl6 p-lr-25">
 				{{ $product_data->category->title }}
 			</span>
-		</div>
+		</div> -->
 	</section>
 
 
@@ -353,9 +360,11 @@
 	<section class="sec-relate-product bg0 p-t-45 p-b-105">
 		<div class="container">
 			<div class="p-b-45">
+			<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 				<h3 class="ltext-106 cl5 txt-center">
 					Related Products
 				</h3>
+				</div>
 			</div>
 
 			<!-- Slide2 -->
@@ -376,7 +385,7 @@
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="{{ route('shop.show',$product_data->slug) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="{{ route('front.shop.show',$product_data->slug) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                        {{ $related_products->title}}
 
 									</a>
@@ -407,33 +416,5 @@
 
     @section('javascript')
     <script>
-
-    // @if(session()->has('sweet_success'))
-    // admin.showSuccessMessage($product_name."Added to Cart!", "{{ session('sweet_success') }}")
-    //  @endif
-
-    //  @if(session()->has('sweet_error'))
-    // admin.showErrorMessage("Sorry!", "{{ session('sweet_error') }}")
-    //  @endif
-
-
-    //     $('.js-addcart-detail').each(function(){
-    //         var nameProduct = $(this).attr("product_name");
-    //         $.ajax({
-    //             type:'post',
-    //             url:'{{ route("addToCart") }}',
-    //                 data:{product_name:nameProduct,
-    //                     "_token": "{{ csrf_token() }}",
-    //                 },
-    //                 success:function(resp){
-    //                 $(this).on('click', function(){
-    //                     swal(product_name, "is added to cart !", "success");
-    //                 });
-    //             },error:function(){
-    //                 alert("error");
-    //             }
-    //          })
-    // });
-
 </script>
     @endsection

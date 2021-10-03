@@ -1,6 +1,7 @@
 <?php
 return[
-    'title' => 'Nepali Title',
+    'default' => "English",
+    'title' => 'Title',
     'slider' => 'Slider',
     'blog' => 'Blog',
     'Home' => 'Home',
@@ -19,6 +20,7 @@ return[
     'Status' => 'Status',
     'Date' => 'Date',
     'Featured' => 'Featured',
+    "dashboard" => "Dashboard"
 ];
 
 ?>

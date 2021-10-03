@@ -11,26 +11,41 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
+    protected $product, $category, $slider, $blog;
+
+
+    public function __construct(Product $product, Category $category, Slider $slider, Blog $blog)
+    {
+        $this->product = $product;
+        $this->category = $category;
+        $this->blog = $blog;
+        $this->slider = $slider;
+    }
+
+
     public function __invoke(){
-        $slider =  Slider::translatedIn(app()->getLocale())
-        ->latest()
+        $slider =  Slider::latest()
         ->take(10)
         ->get();
 
-        $product = Product::translatedIn(app()->getLocale())
-        ->with('category')
-        ->latest()
-        ->take(10)
-        ->get();
+        $product = $this->product->active()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation()->select(['title', 'product_id']);
+            }])
+            ->with('category')
+            ->take(8)
+            ->get();
 
-        $category = Category::translatedIn(app()->getLocale())
-        ->with('products')
-        ->latest()
-        ->take(3)
-        ->get();
+        $category = $this->category->active()
+            ->with('product')
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation()->select(['title', 'category_id']);
+            }])
+            ->take(3)
+            ->get();
 
-        $blog = Blog::translatedIn(app()->getLocale())
-        ->latest()
+
+        $blog = Blog::latest()
         ->take(3)
         ->get();
 

@@ -6,7 +6,6 @@
 </head>
 <body class="animsition">
     @include('user.section.header')
-    <!-- @include('user.section.sidebar') -->
     @include('user.section.header_cart')
     @yield('content')
 

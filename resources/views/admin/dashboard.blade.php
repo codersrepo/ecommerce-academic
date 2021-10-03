@@ -5,7 +5,7 @@
 @endsection --}}
 @section('content')
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
                                 <div class="ibox-title">Latest Orders</div>
@@ -98,68 +98,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="ibox">
-                            <div class="ibox-head">
-                                <div class="ibox-title">Best Sellers</div>
-                            </div>
-                            <div class="ibox-body">
-                                <ul class="media-list media-list-divider m-0">
-                                    <li class="media">
-                                        <a class="media-img" href="javascript:;">
-                                            <img src="./assets/img/image.jpg" width="50px;" />
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="media-heading">
-                                                <a href="javascript:;">Samsung</a>
-                                                <span class="font-16 float-right">1200</span>
-                                            </div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <a class="media-img" href="javascript:;">
-                                            <img src="./assets/img/image.jpg" width="50px;" />
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="media-heading">
-                                                <a href="javascript:;">iPhone</a>
-                                                <span class="font-16 float-right">1150</span>
-                                            </div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <a class="media-img" href="javascript:;">
-                                            <img src="./assets/img/image.jpg" width="50px;" />
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="media-heading">
-                                                <a href="javascript:;">iMac</a>
-                                                <span class="font-16 float-right">800</span>
-                                            </div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <a class="media-img" href="javascript:;">
-                                            <img src="./assets/img/image.jpg" width="50px;" />
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="media-heading">
-                                                <a href="javascript:;">apple Watch</a>
-                                                <span class="font-16 float-right">705</span>
-                                            </div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="ibox-footer text-center">
-                                <a href="javascript:;">View All Products</a>
                             </div>
                         </div>
                     </div>

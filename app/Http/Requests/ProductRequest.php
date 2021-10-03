@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Product;
+use App\Models\Language;
+use Illuminate\Validation\Rule;
+
 
 class ProductRequest extends FormRequest
 {
@@ -23,34 +27,35 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        $locale = config('translatable.locale');
-        $rules = [
-            'en.title' => 'required',
-            'en.summary' => 'required',
-            'en.description' => 'required',
-            'en.price' => 'required',
-            'en.discount_percent' => 'required',
-            'en.brand_name' => 'required',
-            'product_code' => 'required',
-            // 'images' => 'required',
-            'image_icon' => 'required',
-            // 'video' => '',
-            'status' => 'required',
-            'slug' => 'string',
-            'size' => 'required','string',
-            'colour' => 'required','string',
-            'category_id' => 'required','exists:categories,id',
-       ];
+        $rules = $this->prepareRulesForMultiTrans();
 
-        foreach(config('translatable.locales') as $locale){
-            $rules[$locale.'.title'] = 'string';
-            $rules[$locale.'.summary'] = 'string';
-            $rules[$locale.'.description'] = 'string';
-            $rules[$locale.'.price'] = 'string';
-            $rules[$locale.'.product_color'] = 'string';
-            $rules[$locale.'.brand_name'] = 'string';
-            $rules[$locale.'.discount_percent'] = 'string';
-            }
-            return $rules;
+        return array_merge($rules, [
+            'status' => ['required', 'string', Rule::in(Product::STATUS)],
+            // 'images' => ['required', 'array', 'min:1', 'max:10'],
+            // 'images.*' => ['required'],
+            'category' => ['required', 'exists:categories,id'],
+            'product_code' => ['required'],
+            'image_icon' => ['required'],
+            'size' => ['required','string'],
+            'colour' => ['required','string'],
+            'price' => ['required','integer'],
+        ]);
+    }
+
+    protected function prepareRulesForMultiTrans()
+    {
+        $languages = Language::get(['prefix']);
+
+
+        $rules = $languages->map(function ($lang) {
+            $isLangEnglish = $lang->prefix === 'en';
+            return [
+                'title_' . $lang->prefix => ['required', 'string', 'max:' . ($isLangEnglish ? 200 : 300)],
+                'summary_' . $lang->prefix => ['required', 'string', 'max:' . ($isLangEnglish ? 300 : 500)],
+                'description_' . $lang->prefix => ['required', 'string', 'max:' . ($isLangEnglish ? 10000 : 20000)],
+            ];
+        });
+
+        return array_merge(...$rules);
     }
 }

@@ -12029,10 +12029,11 @@ btn .caret {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* background-color: #a09aa66b; */
     height: 50px; }
     .ibox .ibox-head .ibox-title {
-      font-size: 16px;
-      font-weight: 600; }
+      font-size: 14px;
+      font-weight: 500; }
       .ibox .ibox-head .ibox-title small {
         font-weight: 400;
         font-size: 13px;

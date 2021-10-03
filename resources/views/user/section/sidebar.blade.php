@@ -1,5 +1,4 @@
-	Sidebar
-	<!-- <aside class="wrap-sidebar js-sidebar">
+<aside class="wrap-sidebar js-sidebar">
 		<div class="s-full js-hide-sidebar"></div>
 
 		<div class="sidebar flex-col-l p-t-22 p-b-25">
@@ -55,52 +54,52 @@
 
 					<div class="flex-w flex-sb p-t-36 gallery-lb">
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="" data-lightbox="gallery"
 							style="background-image: url('');"></a>
-						</div> -->
+						</div>
 
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="" data-lightbox="gallery"
 							style="background-image: url('');"></a>
-						</div> -->
+						</div>
 
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="" data-lightbox="gallery"
 							style="background-image: url('');"></a>
-						</div> -->
+						</div>
 
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="" data-lightbox="gallery"
 							style="background-image: url('');"></a>
-						</div> -->
+						</div>
 
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="');"></a>
-						</div> -->
+						</div>
 
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="" data-lightbox="gallery"
 							style="background-image: url('');"></a>
-						</div> -->
+						</div>
 
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="" data-lightbox="gallery"
 							style="background-image: url('');"></a>
-						</div> -->
+						</div>
 
 						<!-- item gallery sidebar -->
-						<!-- <div class="wrap-item-gallery m-b-10">
+						<div class="wrap-item-gallery m-b-10">
 							<a class="item-gallery bg-img1" href="" data-lightbox="gallery"
 							style="background-image: url('');"></a>
-						</div> -->
-					<!-- </div>
+						</div>
+					</div>
 				</div>
 
 				<div class="sidebar-gallery w-full">
@@ -114,4 +113,4 @@
 				</div>
 			</div>
 		</div>
-	</aside> -->
+	</aside>

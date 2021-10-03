@@ -16,7 +16,7 @@
                     </div>
                     <div class="ibox-body">
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                             <tr>
                                 <th>Title</th>
                                 <th>Summary</th>
@@ -30,8 +30,8 @@
                             @if($data)
                                 @foreach($data as $data_indiv)
                                     <tr>
-                                        <td>{{ $data_indiv->title }} </td>
-                                        <td>{{ $data_indiv->summary }} </td>
+                                        <td>{{ $data_indiv->firstTranslation()->title }} </td>
+                                        <td>{{ $data_indiv->firstTranslation()->summary }} </td>
                                         @if($data_indiv->image)
                                         <td> <img  style="max-width: 150px" src="{{ asset('images/categories/'.$data_indiv->image) }}" alt="Category_image"></td>
                                         @endif
@@ -47,7 +47,7 @@
                                             </span></td>
 
 
-                                        <td><a href="{{ route('category.edit',$data_indiv->id) }}" class="btn btn-primary">Edit</a>
+                                        <td><a href="{{ route('category.edit',$data_indiv->id) }}">Edit</a>
                                             <form action="{{ route('category.destroy',$data_indiv->id) }}" class='form float-left' onsubmit = 'return confirm("you sure? To delete this")' id="delete-form" method="post">
                                                 @method('delete')
                                                 @csrf
