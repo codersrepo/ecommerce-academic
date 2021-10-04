@@ -73,11 +73,11 @@
 							</li>
 
 							<li>
-								<a href="about.html">{{ (__('trans.About')) }}</a>
+								<a href="{{ route('front.about') }}">{{ (__('trans.About')) }}</a>
 							</li>
 
 							<li>
-								<a href="contact.html">{{ (__('trans.Contact')) }}</a>
+								<a href="{{ route('front.contact') }}"> {{ (__('trans.Contact')) }}  </a>
 							</li>
 						</ul>
 					</div>

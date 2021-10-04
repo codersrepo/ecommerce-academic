@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
     Route::get('product/{slug}', 'ShopController@show')->name('shop.show');
     Route::get('blog', 'BlogController@index')->name('blogs.index');
     Route::get('blog/{slug}', 'BlogController@show')->name('blogs.show');
-    Route::post('add-to-cart','Cartcontroller@index')->name('add-to-cart');
+    Route::post('add-to-cart','Cartcontroller@store')->name('add-to-cart');
+    Route::delete('cart/{id}','Cartcontroller@destroy')->name('cart.destroy');
     Route::get('cart','CartController@cart')->name('cart');
+    Route::get('/header/cart','CartController@header_cart')->name('cart.index');
+    Route::get('/contact','HeaderController@contact')->name('contact');
+    Route::get('/about','HeaderController@about')->name('about');
 

@@ -21,9 +21,6 @@
                             <span class="nav-label">{{ (__('trans.slider')) }}</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-                                {{-- <a href="{{ route('slider.create') }}">Add Slider</a> --}}
-                            </li>
-                            <li>
                                 <a href="{{ route('slider.create') }}">Add Slider</a>
                             </li>
 

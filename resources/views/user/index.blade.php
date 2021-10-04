@@ -6,7 +6,7 @@
 	<div class="wrap-slick1">
 		<div class="slick1">
 			@foreach ($slider as $slider_data )
-			<div class="item-slick1" style="background-image: url({{ asset('images/sliders/'.$slider_data->image) }});">
+			<div class="item-slick1" style="background-image: url({{ asset('images/sliders/'.$slider_data->image) }})">
 				<div class="container h-full">
 					<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 						<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
