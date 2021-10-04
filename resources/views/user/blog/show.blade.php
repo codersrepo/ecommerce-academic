@@ -66,17 +66,17 @@
 							</span>
 
 							<h4 class="ltext-109 cl2 p-b-28">
-                                    {{$blog_data->title}}
+                                    {{$blog_data->firstTranslation()->title}}
 					</h4>
 
 							<p class="stext-117 cl6 p-b-26">
-                                {{$blog_data->summary}}
+                                {{$blog_data->firstTranslation()->summary}}
 
                             </h4>
 							</p>
 
 							<p class="stext-117 cl6 p-b-26">
-								Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
+							{{$blog_data->firstTranslation()->description}}
 							</p>
 						</div>
 

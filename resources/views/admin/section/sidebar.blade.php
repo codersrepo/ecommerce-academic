@@ -21,14 +21,7 @@
                             <span class="nav-label">{{ (__('trans.slider')) }}</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
                             <li>
-<<<<<<< HEAD
-                                <a href="{{ route('slider.create') }}">Add Slider</a>
-=======
-                                {{-- <a href="{{ route('slider.create') }}">{{ (__('trans.Add Slider')) }}</a> --}}
-                            </li>
-                            <li>
                                 <a href="{{ route('slider.create') }}">{{ (__('trans.Add Slider')) }}</a>
->>>>>>> origin/moretranslations
                             </li>
 
                             <li>
@@ -70,18 +63,6 @@
                             </li>
                             <li>
                                 <a href="{{ route('blog.index') }}"> {{ (__('trans.Blog List')) }}</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
-                            <span class="nav-label">{{ (__('trans.Facility')) }}</span><i class="fa fa-angle-left arrow"></i></a>
-                        <ul class="nav-2-level collapse">
-                            <li>
-                            <a href="{{ route('facilities.create') }}">{{ (__('trans.Add Facility')) }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('facilities.index') }}"> {{ (__('trans.Facility List')) }}</a>
                             </li>
                         </ul>
                     </li>

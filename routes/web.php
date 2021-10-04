@@ -44,7 +44,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
         Route::resource('/facilities', 'FacilityController')->except('show');
         Route::put('facilities/{facility}/toggle-status', 'FacilityController@toggleStatus')->name('facilities.toggle-status');
 
-        Route::post('updateBlogStatus','BlogController@togglestatus')->name('updateStatus');
+        Route::post('updateBlogStatus','BlogController@togglestatus')->name('updateBlogStatus');
 
         Route::resource('/product','ProductController');
         Route::post('updateProductStatus','ProductController@togglestatus')->name('updateProductStatus');

@@ -5,11 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Blog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Language;
 use App\Http\Requests\BlogRequest;
 use App\Http\Controllers\Controller;
 
 class BlogController extends Controller
 {
+    public $blog = null;
+
+    public function __construct(Blog $blog)
+    {
+        $this->blog = $blog;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $data = Blog::translatedIn(app()->getLocale())
+        $data = $this->blog->latest()->with(['translations' => function ($q) {
+            $q->where('language_id', session('language_id'));
+        }])
         ->latest()
         ->take(10)
         ->get();
@@ -31,7 +41,10 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.form');
+        return view('admin.blog.form', [
+            'blog' => $this->blog,
+            'languages' => Language::get(['language as title', 'prefix', 'id'])
+        ]);
     }
 
     /**
@@ -43,35 +56,26 @@ class BlogController extends Controller
     public function store(BlogRequest $request)
     {
         $data = $request->validated();
-        $lang_data = [];
-        foreach($data as $key => $item){
-            if(is_array(($item))){
-                $lang_data = $item;
-                unset($data[$key]);
-            }
-        }
-        $lang = app()->getlocale();
-        $data[$lang] = $lang_data;
-        $key = array_keys($data);
+        $data['slug'] = $this->prepareSlug($data['title_en']);
+
         if($request->hasFile('image')){
             $randomize = rand(10,500);
             $extension = $request->file('image')->getClientOriginalExtension();
             $filename = $randomize.'.'.$extension;
             $image = $request->file('image')->move('images/blogs',$filename);
         }
-        // dd($data);
-        // $data['slug'] = Str::slug($request->title);
-        $data['slug'] = $this->prepareSlug($data[$key['2']]['title']);
         $data['image'] = $filename;
-        print_r($data);
-        $data = Blog::create($data);
-            // $data->image = $filename;
-            // $data->save();
-        if($data){
-                return redirect()->route('blog.index')->with('sweet_success','Data added Successfully');
-            } else {
-                return redirect()->route('blog.index')->with('sweet_error','Data couldnot be added');
+
+        if ($blog = $this->blog->create($data)) {
+
+            $blogTrans = $this->prepareblogTrans($data);
+
+            $blog->translations()->createMany($blogTrans);
+
         }
+
+                return redirect()->route('blog.index')->with('sweet_success','Data added Successfully');
+
     }
 
     /**
@@ -125,6 +129,37 @@ class BlogController extends Controller
         }
     }
 
+    private function prepareSlug($sluggableValue)
+    {
+        $slug = Str::slug($sluggableValue);
+        while (true) {
+            if ($this->blog->where('slug', $slug)->doesntExist()) {
+                return $slug;
+            }
+
+            $slug .= rand(1, 10000);
+        }
+    }
+
+    private function prepareBlogTrans($data)
+    {
+        $languages = Language::get(['id', 'prefix']);
+
+        return $languages->map(function ($language) use ($data) {
+            $title = 'title_' . $language->prefix;
+            $summary = 'summary_' . $language->prefix;
+            $description = 'description_' . $language->prefix;
+
+            return [
+                'title' => $data[$title],
+                'description' => $data[$description],
+                'summary' => $data[$summary],
+                'language_id' => $language->id
+            ];
+        });
+    }
+
+
     public function togglestatus(Request $request){
         if($request->ajax()){
             $data = $request->all();
@@ -137,19 +172,6 @@ class BlogController extends Controller
             return response()->json(['status' => $status,'blog_id' => $data['blog_id']]);
 
         }
+
     }
-
-
-    public function prepareSlug($slggableValue){
-        $slug = Str::slug($slggableValue);
-        while(true){
-            if(Blog::where('slug',$slug)->doesntExist()){
-                return $slug;
-            }
-            $slug = rand(1,5000);
-        }
-    }
-
-
-
 }

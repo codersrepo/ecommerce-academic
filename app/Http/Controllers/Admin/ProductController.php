@@ -110,10 +110,15 @@ class ProductController extends Controller
                 }
                 Image::make($image_tmp)->resize(520, 600)->save($small_size_image . $image_name);
                 Image::make($image_tmp)->save($large_size_image . $image_name);
-                $product->images()->create([
+                $status = ProductImage::create([
                     'images' => $image_name,
                     'product_id' => $product['id']
                 ]);
+                if($status){
+                    print "done";
+                } else {
+                    print "not";
+                }
             }
             return redirect()->route('product.index')->with('sweet_success', 'Data added Successfully');
         }

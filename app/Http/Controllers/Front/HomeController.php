@@ -14,9 +14,10 @@ class HomeController extends Controller
     protected $product, $category, $slider, $blog;
 
 
-    public function __construct(Product $product, Category $category, Slider $slider, Blog $blog)
+    public function __construct(Product $product,Blog $blog, Category $category, Slider $slider)
     {
         $this->product = $product;
+        $this->blog = $blog;
         $this->category = $category;
         $this->blog = $blog;
         $this->slider = $slider;
@@ -45,10 +46,13 @@ class HomeController extends Controller
             ->get();
 
 
-        $blog = Blog::latest()
-        ->take(3)
-        ->get();
+            $blog = $this->blog->active()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation()->select(['title', 'blog_id']);
+            }])
+            ->take(8)
+            ->get();
 
-        return view('user.index', compact(['category', 'product', 'slider','blog']));
+        return view('user.index', compact(['category', 'blog', 'slider','product']));
     }
 }

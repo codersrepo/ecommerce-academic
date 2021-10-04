@@ -10,16 +10,6 @@
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 			</a>
 
-            @if(Session::has('success_message'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top:10px">
-                {{ Session::get('success_message') }}
-                </div>
-
-                @elseif (Session::has('error_message'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top:10px">
-                    {{ Session::get('error_message') }}
-                    </div>
-                @endif
 			<a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
 				{{ $product_data->category->title }}
 				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
@@ -71,6 +61,16 @@
 						</p>
 
                         <!--  -->
+						@if(Session::has('success_message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top:10px">
+                {{ Session::get('success_message') }}
+                </div>
+
+                @elseif (Session::has('error_message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top:10px">
+                    {{ Session::get('error_message') }}
+                    </div>
+                @endif
 
                         <div class="p-t-33">
                             <form method="post" action="{{ route('front.add-to-cart') }}" enctype="multipart/form-data">

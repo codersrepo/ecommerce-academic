@@ -37,13 +37,13 @@
 
 							<div class="p-t-32">
 								<h4 class="p-b-15">
-									<a href="{{ route('blogs.show',$blog_data->slug) }}" class="ltext-108 cl2 hov-cl1 trans-04">
-										{{ $blog_data->title }}
+									<a href="{{ route('front.blogs.show',$blog_data->slug) }}" class="ltext-108 cl2 hov-cl1 trans-04">
+										{{ $blog_data->firstTranslation()->title }}
 									</a>
 								</h4>
 
 								<p class="stext-117 cl6">
-                                    {{ $blog_data->summary }}
+                                    {{ $blog_data->firstTranslation()->summary }}
 								</p>
 
 								<div class="flex-w flex-sb-m p-t-18">

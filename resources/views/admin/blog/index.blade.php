@@ -1,5 +1,5 @@
 @extends('layouts.admin ');
-@section('title','blog Listing Page| Admin Page')
+@section('title','Blog Listing Page| Admin Page')
 
 @section('content')
     <div class="page-content fade-in-up">
@@ -11,12 +11,12 @@
 
                         </div>
                         <a href="{{route('blog.create')}}" class="btn btn-success float-right">
-                            <i class="fa fa-plus"></i>{{ (__('trans.Add blog')) }}
+                            <i class="fa fa-plus"></i>{{ (__('trans.Add Blog')) }}
                         </a>
                     </div>
                     <div class="ibox-body">
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                             <tr>
                                 <th>{{ (__('trans.Title')) }}</th>
                                 <th>{{ (__('trans.Summary')) }}</th>
@@ -30,12 +30,13 @@
                             @if($data)
                                 @foreach($data as $data_indiv)
                                     <tr>
-                                        <td>{{ $data_indiv->title }} </td>
-                                        <td>{{ $data_indiv->summary }} </td>
+                                        <td>{{ $data_indiv->firstTranslation()->title }} </td>
+                                        <td>{{ $data_indiv->firstTranslation()->summary }} </td>
                                         @if($data_indiv->image)
                                         <td> <img  style="max-width: 150px" src="{{ asset('images/blogs/'.$data_indiv->image) }}" alt="blog_image"></td>
                                         @endif
                                         <td>
+                                            {{-- {{ dd($data_indiv->status) }} --}}
                                             @if($data_indiv->status == 'active')
                                                  <a class="updateblogStatus badge badge-success" id="blog-{{ $data_indiv->id }}" blog_id = {{ $data_indiv->id }} href="javascript:void(0)">
                                             Active </a>
@@ -46,12 +47,12 @@
                                             </span></td>
 
 
-                                        <td><a href="{{ route('blog.edit',$data_indiv->id) }}" class="btn btn-primary">Edit</a>
-                                            <form action="{{ route('blog.destroy',$data_indiv->id) }}" class='form float-left ' onsubmit = 'return confirm("are you sure ou want to delete")' id="logout_form" method="post">
+                                        <td><a href="{{ route('blog.edit',$data_indiv->id) }}">Edit</a>
+                                            <form action="{{ route('blog.destroy',$data_indiv->id) }}" class='form float-left' onsubmit = 'return confirm("you sure? To delete this")' id="delete-form" method="post">
                                                 @method('delete')
                                                 @csrf
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        <a href="{{ route('blog.show',$data_indiv->id) }}" class="btn btn-warning">Show</a>
+                                            <button type="submit" class='btn btn-danger btn-circle'> <i class="fa fa-trash"></i> </button>
+                                        </form>
                                             @endforeach
                                     </tr>
                             @endif
@@ -70,20 +71,20 @@
 
 @section('script')
 <script>
-    $(".updateblogStatus").click(function(){
+    $(".updateBlogStatus").click(function(){
     var status = $(this).text();
     var blog_id = $(this).attr("blog_id");
     $.ajax({
         type:'post',
-        url:'{{ route("updateStatus") }}',
+        url:'{{ route("updateBlogStatus") }}',
         data:{status:status,blog_id:blog_id,
             "_token": "{{ csrf_token() }}",
         },
         success:function(resp){
             if(resp['status'] == 'active'){
-                $("#blog-"+blog_id).html("<a class='updateblogStatus badge badge-success' href='javascript:void(0)'>Active </a>");
+                $("#blog-"+blog_id).html("<a class='updateBlogStatus badge badge-success' href='javascript:void(0)'>Active </a>");
             } else if(resp['status'] == 'inactive'){
-                $("#blog-"+blog_id).html("<a class='updateblogStatus badge badge-danger' href='javascript:void(0)'>Inactive </a>");
+                $("#blog-"+blog_id).html("<a class='updateBlogStatus badge badge-danger' href='javascript:void(0)'>Inactive </a>");
             }
         },error:function(){
             alert("Error");

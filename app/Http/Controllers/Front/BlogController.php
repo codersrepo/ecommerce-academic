@@ -8,20 +8,38 @@ use App\Http\Controllers\Controller;
 
 class BlogController extends Controller
 {
-    public function index(){
-        $blog = Blog::translatedIn(app()->getLocale())
-        ->latest()
-        ->take(10)
-        ->get();
+    protected $blog;
+
+
+    public function __construct(Blog $blog)
+    {
+        $this->blog = $blog;
+    }
+
+
+    public function index(Request $request){
+        $blog = $this->blog
+            ->active()
+            ->when($request->q, function ($q, $title) {
+                $q->whereHas('translations', function ($q) use ($title) {
+                    $q->correctTranslation()->where('title', 'LIKE', "%{$title}%");
+                });
+            })
+            ->latest()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation()->select(['title', 'blog_id']);
+            }])
+            ->paginate(9);
         return view('user.blog.index', compact(['blog']));
 
     }
 
     public function show($slug){
-        $blog_data = Blog::translatedIn(app()->getLocale())
-        ->where('slug', $slug)
-        ->where('status','=', 'active')
-        ->first();
+        $blog_data =  $this->blog->active()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation();
+            }])->where('slug', $slug)
+            ->first();
 
 
         return view('user.blog.show')

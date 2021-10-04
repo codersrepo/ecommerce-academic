@@ -159,19 +159,19 @@
 								</span>
 
 								<span class="cl5">
-									{{ $blog_data->created_at }}
+									<!-- {{ $blog_data->created_at }} -->
 								</span>
 							</span>
 						</div>
 
 						<h4 class="p-b-12">
 							<a href="{{ route('blog.index') }}" class="mtext-101 cl2 hov-cl1 trans-04">
-								{{ $blog_data->title }}
+								{{ $blog_data->firstTranslation()->title }}
 							</a>
 						</h4>
 
 						<p class="stext-108 cl6">
-							{{ $blog_data->summary }}
+							{{ $blog_data->firstTranslation()->summary }}
 						</p>
 					</div>
 				</div>

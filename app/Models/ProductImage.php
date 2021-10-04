@@ -13,6 +13,6 @@ class ProductImage extends Model
     // protected $table = 'images';
 
     public function product(){
-        $this->belongsTo(Product::class);
+        $this->belongsTo(Product::class,'product_id', 'id');
     }
 }

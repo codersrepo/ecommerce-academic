@@ -1,3 +1,104 @@
+@section('script')
+<!-- <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script> -->
+
+<script>
+    $(document).ready(function() {
+
+        $('#languageSwticher').change(handleLanguageSwitch);
+
+        $('#form-submit').click(handleFormSubmitClickBtn)
+    });
+
+    function syncFormTrans(lang) {
+        const translations = getFormTrans();
+
+        Array.from(document.querySelectorAll('label[data-text]')).forEach((label) => {
+            label.innerText = translations[lang][label.dataset.text];
+        })
+    }
+
+    function getFormTrans() {
+        let trans = [];
+        @php
+        $actualLocale = app()->getLocale();
+        @endphp
+
+        @foreach ($languages as $lang)
+        {{ app()->setLocale($lang->prefix) }}
+        trans['{{ $lang->prefix }}'] = @json(__("trans.form"));
+        @endforeach
+
+        {{ app()->setLocale($actualLocale) }}
+
+        return trans;
+    }
+
+    function setupFileManagers() {
+        $('#lfm1').filemanager('image');
+    }
+
+    function canSubmitForm() {
+        let nextTab = true;
+        let langTab = null;
+
+        // looping through each form fields and checking for validaiton
+        $.each($('#main-form').find('input,select').filter('[required]'), function() {
+            let el = $(this)[0];
+            el.classList.remove('is-invalid')
+
+            if (!el.checkValidity() || el.value.trim() == '') {
+                el.classList.add('is-invalid')
+
+                if (langTab === null) {
+                    // finding the closest lang-tab to the error field
+                    langTab = el.closest('.lang-tab');
+
+                    if (langTab) {
+                        // unsetting the current active lang-tab
+                        document.querySelector('.active-form').classList.add('d-none');
+                        document.querySelector('.active-form').classList.remove('active-form')
+
+                        // setting the langtab as active lang-tab
+                        langTab.classList.remove('d-none')
+                        langTab.classList.add('active-form')
+
+                        // sync the value of language change dropdown
+                        $('#languageSwticher').val(langTab.dataset.lang)
+                        syncFormTrans(langTab.dataset.lang)
+                    }
+                }
+                nextTab = false;
+            }
+        })
+
+        return nextTab;
+    }
+
+    function handleFormSubmitClickBtn(e) {
+        e.preventDefault();
+
+        if (!canSubmitForm()) {
+            $('#main-form-link').click()
+            return;
+        }
+
+        $('.blog-form').submit();
+    }
+
+    function handleLanguageSwitch(e) {
+        document.querySelector('.active-form').classList.add('d-none');
+        document.querySelector('.active-form').classList.remove('active-form')
+
+        document.getElementById(`lang_${e.target.value}`).classList.remove('d-none')
+        document.getElementById(`lang_${e.target.value}`).classList.add('active-form')
+
+        syncFormTrans(e.target.value)
+    }
+</script>
+
+
+@endsection
+
 @extends('layouts.admin')
 @section('content')
 <div class="page-content fade-in-up">
@@ -5,70 +106,105 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">blog {{ isset($data) ? 'Update' : 'Add' }}
+                    <div class="ibox-title">
+                        {{ $blog->id ? __('trans.blog.update') :
+                            __('trans.blog.add') }}
                     </div>
+                    <div class="ibox-title">
+                        <div class="row" style="align-items: center">
+                            <div class="col-6">Language:</div>
+                            <select class="col-6 form-control form-control-sm" name="" id="languageSwticher">
+                                @foreach ($languages as $lang)
+                                <option value="{{ $lang->prefix }}">{{ $lang->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="ibox-body">
-                    <form method="post" action="{{ route('blog.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <!-- <h3>for {{ app()->getlocale() }}</h1> -->
-                        <div class="form-group">
-                            <label for="">Title ({{strtoupper(app()->getlocale()) }})</label>
-                            <input type="text" name="{{ app()->getlocale() }}[title]" class="form-control" aria-describedby="emailHelp" placeholder="Enter Text">
-                            @error('title')
-                            <span class="alert-danger">{{$message}} </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Summary ({{strtoupper(app()->getlocale()) }})</label>
-                            <input type="text" name="{{ app()->getlocale() }}[summary]" class="form-control" aria-describedby="emailHelp" placeholder="Enter Text">
-                            @error('summary')
-                            <span class="alert-danger">{{$message}} </span>
-                            @enderror
-                        </div>
+                    @if($blog->id)
+                    <form method="POST" action="{{ route('blog.update', $blog->id) }}" class="blog-form" enctype="multipart/form-data">
+                        @method('PUT')
+                        @else
+                        <form method="POST" action="{{ route('blog.store') }}" class="blog-form" enctype="multipart/form-data">
+                            @endif
+                            @csrf
+                            <div class="tab-pane fade show active" id="main-form" role="tabpanel">
+                            @foreach ($languages as $lang)
+                                        <div id="lang_{{ $lang->prefix }}" data-lang="{{ $lang->prefix }}"
+                                            class="lang-tab {{ $lang->prefix === 'en' ? 'active-form' : 'd-none' }}">
+                                            <div class="form-group row">
+                                                {{ Form::label('title_'.$lang->prefix, __('trans.title') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'title']) }}
+                                                <div class="col-sm-12 col-md-9">
 
-                        <div class="form-group">
-                            <label for="">Description({{strtoupper(app()->getlocale()) }})</label>
-                            <input type="text" name="{{ app()->getlocale() }}[description]" class="form-control" aria-describedby="emailHelp" placeholder="Enter Text">
-                            @error('description')
-                            <span class="alert-danger">{{$message}} </span>
-                            @enderror
-                        </div>
+                                                    {{ Form::text('title_'.$lang->prefix, $blog->getFromTranslations('title', $lang->id), ['class'=>'form-control form-control-sm','id'=>'title_'.$lang->prefix,'required'=>true]) }}
 
-                        <div class="form-group row">
-                            {{ Form::label('image','Image',['class'=>'col-sm-3'])}}
-                            <div class="col-sm-4">
-                                {{Form::file('image',['id'=>'image','required'=>(isset($data) ? false : true)] ) }}
-                                @error('image')
-                                <span class="alert-danger">{{$message}} </span>
-                                @enderror
-                            </div>
-                        </div>
+                                                    @error('title_'.$lang->prefix)
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                {{ Form::label('summary_'.$lang->prefix, __('trans.summary') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'summary']) }}
+                                                <div class="col-sm-12 col-md-9">
+                                                    {{ Form::textarea('summary_'.$lang->prefix, $blog->getFromTranslations('summary', $lang->id), ['name' => 'summary_'.$lang->prefix, 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
+                                                    @error('summary_'.$lang->prefix)
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                                            </div>
 
-                        <div class="form-group row">
-                            {{ Form::label('status','Status',['class'=>'col-sm-3'])}}
-                            <div class="col-sm-9">
-                                {{Form::select('status',['active'=> 'Published','inactive'=>'Unpublished'],@$data->status,['class'=>'form-control form-control-sm','id'=>'status','required'=>true])}}
-                                @error('status')
-                                <span class="alert-danger">{{$message}} </span>
-                                @enderror
-                            </div>
+                                            <div class="form-group row">
+                                                {{ Form::label('description_'.$lang->prefix, __('trans.description') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'description']) }}
+                                                <div class="col-sm-12 col-md-9">
+                                                    {{ Form::textarea('description_'.$lang->prefix, $blog->getFromTranslations('description', $lang->id), ['name' => 'description_'.$lang->prefix, 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
+                                                    @error('description_'.$lang->prefix)
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
+                                                </div>
+                                            </div>
 
-                        </div>
+                                        </div>
+                                        @endforeach
+
+                                        <div class="form-group row">
+                                            {{ Form::label('status', __('trans.status').":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'status']) }}
+                                            <div class="col-sm-12 col-md-9">
+                                                {{ Form::select('status',['active'=>__('trans.active'), 'inactive'=>__('trans.inactive')], $blog->status, ['class'=>'form-control form-control-sm', 'id'=>'status','required'=>true]) }}
+                                                @error('status')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            {{ Form::label('image', __('trans.image').":", ['class' => 'col-sm-12 col-md-3 required', 'data-text'=>'image']) }}
+                                            <div class="col-sm-4">
+                                                {{Form::file('image',['id'=>'image','required'=>(isset($data) ? false : true),'accept'=>'image/*'] ) }}
+                                                @error('image')
+                                                <span class="alert-danger">{{$message}}  </span>
+                                                @enderror
+                                            </div>
+                                            <div id="holder1" class="col-sm-12 col-md-5">
+                                                @if($blog->id)
+                                                <img src="{{ $blog->image }}" class="thumbnail_image"
+                                                    alt="{{ $blog->title }}">
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 col-md-9 offset-md-3">
+                                                {{ Form::button("<i class='fa fa-times'></i> ".__('trans.cancelButton'), ['class' => 'btn btn-danger btn-sm', 'type'=>'reset']) }}
+                                                {{ Form::button("<i class='fa fa-paper-plane'></i> ".__('trans.submitButton'), ['class' => 'btn btn-success btn-sm', 'id'=>'form-submit']) }}
+                                            </div>
+                                        </div>
+                        </form>
                 </div>
-                <div class="form-group row">
-                    {{ Form::label('','',['class'=>'col-sm-3'])}}
-                    <div class="col-sm-9">
-                        {{ Form::button('<i class="fa fa-trash"></i>Reset',['class'=>'btn btn-sm btn-danger', 'id'=>'reset','type'=>'reset'] ) }}
-                        {{ Form::button('<i class="fa fa-paper-plane"></i>Submit',['class'=>'btn btn-sm btn-success', 'id'=>'submit','type'=>'submit'] ) }}
-                    </div>
-
-                </div>
-                {{ Form::close()}}
-
             </div>
         </div>
+
     </div>
 
-</div>
-@endsection
+    @endsection

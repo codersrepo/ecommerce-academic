@@ -9,5 +9,5 @@ class SliderTranslation extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $fillable = ['title', 'summary'];
+    protected $fillable = ['title','summary'];
 }

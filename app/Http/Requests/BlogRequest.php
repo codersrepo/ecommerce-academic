@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Requests;
+use App\Models\Blog;
+use App\Models\Language;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,21 +26,26 @@ class BlogRequest extends FormRequest
      */
     public function rules()
     {
-        $locale = config('translatable.locale');
-        $rules = [
-            'en.title' => 'required',
-            'en.summary' => 'required',
-            'en.description' => 'required','max:2000',
-            'image' => 'required',
-            'status' => 'required',
-            'slug' => 'string'
-        ];
+        $rules = $this->prepareRulesForMultiTrans();
 
-        foreach(config('translatable.locales') as $locale){
-            $rules[$locale.'.title'] = 'string';
-            $rules[$locale.'.summary'] = 'string';
-            $rules[$locale.'.description'] = 'string|max:2000';
-            }
-            return $rules;
+        return array_merge($rules, [
+                'status' => ['required', 'string', Rule::in(Blog::STATUS)],
+                'image' => ['required'],
+            ]);
+        }
+    
+        protected function prepareRulesForMultiTrans()
+        {
+            $languages = Language::get(['prefix']);
+    
+            $rules = $languages->map(function ($lang) {
+                $isLangEnglish = $lang->prefix === 'en';
+                return [
+                    'title_' . $lang->prefix => ['required', 'string', 'max:' . ($isLangEnglish ? 200 : 300)],
+                    'summary_' . $lang->prefix => ['required', 'string', 'max:' . ($isLangEnglish ? 300 : 500)],
+                    'description_' . $lang->prefix => ['required', 'string'],
+                ];
+            });
+            return array_merge(...$rules);
+        }
     }
-}

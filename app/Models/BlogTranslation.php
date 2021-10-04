@@ -8,6 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class BlogTranslation extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
-    protected $fillable = ['title', 'summary','description'];
+    protected $fillable = [
+        'title',
+        'summary',
+        'description',
+        'language_id',
+        'blog_id'
+    ];
+
+    public function blog()
+    {
+        $this->belongsTo(blog::class, 'blog_id', 'id');
+    }
+
+    public function scopeCorrectTranslation($q)
+    {
+        return $q->where('language_id', session('language_id'));
+    }
 }
