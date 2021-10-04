@@ -18,11 +18,11 @@
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Summary</th>
-                                <th>Image</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{ (__('trans.Title')) }}</th>
+                                <th>{{ (__('trans.Summary')) }}</th>
+                                <th>{{ (__('trans.Image')) }}</th>
+                                <th>{{ (__('trans.Status')) }}</th>
+                                <th>{{ (__('trans.Action')) }}</th>
                             </tr>
                             </thead>
                             <tbody>

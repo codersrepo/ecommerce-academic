@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Categories
+						{{ (__('trans.Categories')) }}
 					</h4>
 
 					<ul>
@@ -37,31 +37,31 @@
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Help
+						{{ (__('trans.Help')) }}
 					</h4>
 
 					<ul>
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Track Order
+								{{ (__('trans.Track Order')) }}
 							</a>
 						</li>
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns
+								{{ (__('trans.Returns')) }}
 							</a>
 						</li>
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shipping
+								{{ (__('trans.Shipping')) }}
 							</a>
 						</li>
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								FAQs
+								{{ (__('trans.FAQs')) }}
 							</a>
 						</li>
 					</ul>
@@ -69,11 +69,11 @@
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						GET IN TOUCH
+					{{ (__('trans.Get in Touch')) }}
 					</h4>
 
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						{{ (__('trans.Any questions? Let us know at store Productsporium and contact us at 1234567')) }}
 					</p>
 
 					<div class="p-t-27">
@@ -93,7 +93,7 @@
 
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Newsletter
+						{{ (__('trans.Newsletter')) }}
 					</h4>
 
 					<form>
@@ -104,7 +104,7 @@
 
 						<div class="p-t-18">
 							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribe
+							 	{{ (__('trans.Subscribe')) }}
 							</button>
 						</div>
 					</form>

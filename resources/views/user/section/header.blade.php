@@ -6,12 +6,12 @@
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						{{ (__('trans.Free shipping for standard order over $100')) }}
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
+							{{ (__('trans.Help & FAQs')) }}
 						</a>
 
                      @auth
@@ -27,11 +27,11 @@
                     @else
 
                         <a href="{{ route('register') }}" class="flex-c-m trans-04 p-lr-25">
-                            Register Account
+                            {{ (__('trans.Register Account')) }}
                         </a>
 
                         <a href="{{ route('login') }}" class="flex-c-m trans-04 p-lr-25">
-                            Login
+							{{ (__('trans.Login')) }}
                         </a>
                     @endauth
 					@if(app()->getLocale() !== 'en')

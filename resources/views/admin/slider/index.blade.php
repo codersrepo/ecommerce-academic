@@ -7,22 +7,22 @@
             <div class="col-lg-12">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">Slider List
+                        <div class="ibox-title">{{ (__('trans.Slider List')) }}
 
                         </div>
                         <a href="{{route('slider.create')}}" class="btn btn-success float-right">
-                            <i class="fa fa-plus"></i>Add Slider
+                            <i class="fa fa-plus"></i>{{ (__('trans.Add Slider')) }}
                         </a>
                     </div>
                     <div class="ibox-body">
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Summary</th>
-                                <th>Image</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{ (__('trans.Title')) }}</th>
+                                <th>{{ (__('trans.Summary')) }}</th>
+                                <th>{{ (__('trans.Image')) }}</th>
+                                <th>{{ (__('trans.Status')) }}</th>
+                                <th>{{ (__('trans.Action')) }}</th>
 
                             </tr>
                             </thead>
