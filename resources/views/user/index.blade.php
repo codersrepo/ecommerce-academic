@@ -23,7 +23,7 @@
 						</div>
 						<div class="layer-slick1 animated visible-false" da-appear="zoomIn" data-delay="1600">
 							<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-							{{ __('trans.Shopnow')}}
+							{{ (__('trans.Shopnow')) }}
 							</a>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 
 						<div class="block1-txt-child2 p-b-4 trans-05">
 							<div class="block1-link stext-101 cl0 trans-09">
-								Shop Now
+								{{ (__('trans.Shopnow')) }}
 							</div>
 						</div>
 					</a>
@@ -75,7 +75,7 @@
 	<div class="container">
 		<div class="p-b-10">
 			<h3 class="ltext-103 cl5">
-				Product Overview
+				{{ (__('trans.Product Overview')) }}
 			</h3>
 		</div>
 		<div class="row isotope-grid">
@@ -114,7 +114,7 @@
 		</div>
 		<div class="flex-c-m flex-w w-full p-t-45">
 				<a href="{{ url('/product')}}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
+					{{ (__('trans.Load More')) }}
 				</a>
 			</div>
 		@endif
@@ -127,7 +127,7 @@
 	<div class="container">
 		<div class="p-b-66">
 			<h3 class="ltext-105 cl5 txt-center respon1">
-				Our Blogs
+				{{ (__('trans.Our Blogs')) }}
 			</h3>
 		</div>
 

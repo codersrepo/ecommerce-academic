@@ -8,7 +8,7 @@
                     <div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-head">
-                                <div class="ibox-title">Latest Orders</div>
+                                <div class="ibox-title">{{ (__('trans.Latest Orders')) }}</div>
                                 <div class="ibox-tools">
                                     <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                     <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
@@ -22,11 +22,11 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Order ID</th>
-                                            <th>Customer</th>
-                                            <th>Amount</th>
-                                            <th>Status</th>
-                                            <th width="91px">Date</th>
+                                            <th>{{ (__('trans.Order ID')) }}</th>
+                                            <th>{{ (__('trans.Customer')) }}</th>
+                                            <th>{{ (__('trans.Amount')) }}</th>
+                                            <th>{{ (__('trans.Status')) }}</th>
+                                            <th width="91px">{{ (__('trans.Date')) }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

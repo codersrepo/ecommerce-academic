@@ -7,25 +7,25 @@
             <div class="col-lg-12">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">Product Listing Page
+                        <div class="ibox-title">{{ (__('trans.Product Listing Page')) }}
 
                         </div>
                         <a href="{{route('product.create')}}" class="btn btn-success float-right">
-                            <i class="fa fa-plus"></i>Add product
+                            <i class="fa fa-plus"></i>{{ (__('trans.Add Product')) }}
                         </a>
                     </div>
                     <div class="ibox-body">
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Summary</th>
-                                <th>Size</th>
-                                <th>Price</th>
-                                <th>Colour</th>
-                                <th>Image</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>{{ (__('trans.Title')) }}</th>
+                                <th>{{ (__('trans.Summary')) }}</th>
+                                <th>{{ (__('trans.Size')) }}</th>
+                                <th>{{ (__('trans.Price')) }}</th>
+                                <th>{{ (__('trans.Colour')) }}</th>
+                                <th>{{ (__('trans.Image')) }}</th>
+                                <th>{{ (__('trans.Status')) }}</th>
+                                <th>{{ (__('trans.Action')) }}</th>
                             </tr>
                             </thead>
                             <tbody>
