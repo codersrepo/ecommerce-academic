@@ -20,7 +20,6 @@ class CreateBlogTranslationsTable extends Migration
             $table->longText('description');
             $table->foreignId('language_id')->nullable()->constrained('languages')->onDelete("SET NULL");
             $table->foreignId('blog_id')->constrained('blogs')->onDelete("CASCADE");
-            $table->unique(['language_id']);
             $table->timestamps();
         });
     }
