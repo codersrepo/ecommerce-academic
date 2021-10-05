@@ -11,25 +11,25 @@
 					<ul>
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Women
+							{{ (__('trans.Womens Clothes')) }}
 							</a>
 						</li>
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Men
+							{{ (__('trans.Mens Clothes')) }}
 							</a>
 						</li>
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shoes
+							{{ (__('trans.Baby Clothes')) }}
 							</a>
 						</li>
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Watches
+							{{ (__('trans.Watches and Accessories')) }}
 							</a>
 						</li>
 					</ul>

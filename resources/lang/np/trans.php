@@ -45,6 +45,8 @@ return[
     'Search' => 'खोज',
     'Your Cart' => 'तपाइँको कार्ट',
     'Cart Totals' => 'कार्ट कुल',
+    'View Cart' => 'कार्ट हेर्नुहोस्',
+    'Check Out' => 'चेक आउट',
     'Price' => 'मूल्य',
     'Quantity' => 'मात्रा',
     'Total' => 'कुल',
@@ -75,6 +77,18 @@ return[
     'Action' => 'कारबाही',
     'Description' => 'वर्णन',
     'Latest Orders' => 'सबभन्दा नया अर्डर',
+    'Watches and Accessories' => 'घडी र फैशनेबल सामान',
+    'Womens Clothes' => 'महिलाहरु को कपडा',
+    'Mens Clothes' => 'पुरुषको लुगा',
+    'Baby Clothes' => 'बच्चाको लुगा',
+    'Our Story' => 'हाम्रो कथा',
+    'Our Mission' => 'हाम्रो मिशन',
+    'All Products' => 'सबै उत्पादनहरु',
+    'Search' => 'खोज',
+    'No products available' => 'कुनै उत्पादन उपलब्ध छैन',
+    'Continue Reading' => 'थप पढ्नुहोस्',
+    
+
 
     //contact us translations
     'Send Us A Message' => 'हामीलाई एक सन्देश पठाउनुहोस्',

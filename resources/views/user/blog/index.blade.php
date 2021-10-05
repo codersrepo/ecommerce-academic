@@ -30,7 +30,7 @@
 									</span>
 
 									<span class="stext-109 cl3 txt-center">
-										Jan 2018
+										May 2021
 									</span>
 								</div>
 							</a>
@@ -54,7 +54,7 @@
 										</span>
 
 										<span>
-											StreetStyle, Fashion, Couple
+											Fashion, Ecommerce, Productsporium
 											<span class="cl12 m-l-4 m-r-6">|</span>
 										</span>
 
@@ -64,7 +64,7 @@
 									</span>
 
 									<a href="blog-detail.html" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
+										{{ (__('trans.Continue Reading')) }}
 
 										<i class="fa fa-long-arrow-right m-l-9"></i>
 									</a>
@@ -96,7 +96,7 @@
 				<div class="col-md-4 col-lg-3 p-b-80">
 					<div class="side-menu">
 						<div class="bor17 of-hidden pos-relative">
-							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="{{ (__('trans.Search')) }}">
 
 							<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
 								<i class="zmdi zmdi-search"></i>
@@ -105,39 +105,35 @@
 
 						<div class="p-t-55">
 							<h4 class="mtext-112 cl2 p-b-33">
-								Categories
+								{{ (__('trans.Categories')) }}
 							</h4>
 
 							<ul>
 								<li class="bor18">
 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Fashion
+										{{ (__('trans.Womens Clothes')) }}
 									</a>
 								</li>
 
 								<li class="bor18">
 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Beauty
+										{{ (__('trans.Mens Clothes')) }}
 									</a>
 								</li>
 
 								<li class="bor18">
 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Street Style
+										{{ (__('trans.Baby Clothes')) }}
 									</a>
 								</li>
 
 								<li class="bor18">
 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Life Style
+										{{ (__('trans.Watches and Accessories')) }}
 									</a>
 								</li>
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										DIY & Crafts
-									</a>
-								</li>
+
 							</ul>
 						</div>
 

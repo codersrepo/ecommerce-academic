@@ -6,7 +6,7 @@
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url({{ asset('images/about.jpg') }});">
 		<h2 class="ltext-105 cl0 txt-center">
-			About
+			{{ (__('trans.About')) }}
 		</h2>
 	</section>	
 
@@ -18,18 +18,18 @@
 				<div class="col-md-7 col-lg-8">
 					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
 						<h3 class="mtext-111 cl2 p-b-16">
-							Our Story
+							{{ (__('trans.Our Story')) }}
 						</h3>
 
 						<p class="stext-113 cl6 p-b-26">
 						</p>
 
 						<p class="stext-113 cl6 p-b-26">
-                        {{ __('trans.About_data') }}
+                        {{ (__('trans.About_data')) }}
 		</p>
 
 						<p class="stext-113 cl6 p-b-26">
-							Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						{{ (__('trans.Any questions? Let us know at store Productsporium and contact us at 1234567')) }}
 						</p>
 					</div>
 				</div>
@@ -47,11 +47,11 @@
 				<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
 					<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
 						<h3 class="mtext-111 cl2 p-b-16">
-							Our Mission
+						{{ (__('trans.Our Mission')) }}
 						</h3>
 
 						<p class="stext-113 cl6 p-b-26">
-                            {{ __('trans.About_data') }}
+                            {{ (__('trans.About_data')) }}
 						</p>
 
 						<div class="bor16 p-l-29 p-b-9 m-t-22">

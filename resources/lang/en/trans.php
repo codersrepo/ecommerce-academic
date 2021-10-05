@@ -47,6 +47,8 @@ return[
     'Search' => 'Search',
     'Your Cart' => 'Your Cart',
     'Cart Totals' => 'Cart Totals',
+    'View Cart' => 'View Cart',
+    'Check Out' => 'Check Out',
     'Price' => 'Price',
     'Quantity' => 'Quantity',
     'Total' => 'Total',
@@ -76,6 +78,17 @@ return[
     'Status' => 'Status',
     'Action' => 'Action',
     'Description' => 'Description',
+    'Watches and Accessories' => 'Watches and Accessories',
+    'Womens Clothes' => 'Womens Clothes',
+    'Mens Clothes' => 'Mens Clothes',
+    'Baby Clothes' => 'Baby Clothes',
+    'Our Story' => 'Our Story',
+    'Our Mission' => 'Our Mission',
+    'All Products' => 'All Products',
+    'Search' => 'Search',
+    'No products available' => 'No products available',
+    'Continue Reading' => 'Continue Reading',
+    
     
     //contact us translations
     'Send Us A Message' => 'Send Us A Message',

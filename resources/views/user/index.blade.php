@@ -23,7 +23,7 @@
 						</div>
 						<div class="layer-slick1 animated visible-false" da-appear="zoomIn" data-delay="1600">
 							<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-							{{ (__('trans.Shopnow')) }}
+							{{ (__('trans.Shop now')) }}
 							</a>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 
 						<div class="block1-txt-child2 p-b-4 trans-05">
 							<div class="block1-link stext-101 cl0 trans-09">
-								{{ (__('trans.Shopnow')) }}
+								{{ (__('trans.Shop now')) }}
 							</div>
 						</div>
 					</a>
