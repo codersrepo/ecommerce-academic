@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasStatus;
 use App\Models\BlogTranslation;
 
-
 class Blog extends Model
 {
     use HasFactory, HasStatus;
@@ -48,4 +47,6 @@ class Blog extends Model
     public function firstTranslation()
     {
         return $this->translations[0];
-    }}
+    }
+}
+

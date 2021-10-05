@@ -24,5 +24,4 @@ class BlogTranslation extends Model
     public function scopeCorrectTranslation($q)
     {
         return $q->where('language_id', session('language_id'));
-    }
-}
+    }}
