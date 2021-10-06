@@ -14,7 +14,7 @@
 </div>
 @if($cart_data)
 <!-- Shoping Cart -->
-<!-- <form class="bg0 p-t-75 p-b-85"> -->
+<form class="bg0 p-t-75 p-b-85">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -56,7 +56,7 @@
 								</td>
 								<td class="column-5">{{ $data->quantity * $data->product->price }}</td>
 								<td class="column-5">
-									<form action="{{ route('front.cart.destroy',$data->id) }}" class='form float-left' onsubmit='return confirm("you sure? To delete this")' method="post">
+									<form action="{{ route('front.cart.destroy',$data->id) }}" class='form float-left' onsubmit='return confirm("you sure? To delete this")'>
 										@method('delete')
 										@csrf
 										<button type="submit" class='btn btn-danger btn-circle'> <i class="fa fa-trash"></i> </button>
@@ -139,7 +139,7 @@
 			</div>
 		</div>
 	</div>
-<!-- </form> -->
+</form>
 @else
 <h6>No products available in cart</h6>
 @endif

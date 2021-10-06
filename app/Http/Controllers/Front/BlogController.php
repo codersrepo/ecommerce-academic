@@ -35,7 +35,16 @@ class BlogController extends Controller
                 $q->correctTranslation()->select(['title', 'blog_id']);
             }])
             ->paginate(9);
-        return view('user.blog.index', compact(['blog']));
+
+            $related_products =  $this->product->active()
+            ->with(['translations' => function ($q) {
+                $q->correctTranslation();
+            }])
+            ->take(4)
+            ->get();
+
+
+        return view('user.blog.index', compact(['blog','related_products']));
 
     }
 
