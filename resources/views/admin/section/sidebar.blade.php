@@ -10,7 +10,7 @@
                 </div> -->
                 <ul class="side-menu metismenu">
                     <li>
-                        <a class="active" href="index.html"><i class="sidebar-item-icon fa fa-th-large"></i>
+                        <a class="active" href=""><i class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label">
                                 {{ (__('trans.Dashboard')) }}
                         </a>
@@ -67,11 +67,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
-                            <span class="nav-label">{{ (__('trans.Orders')) }}</span><i class="fa fa-angle-left arrow"></i></a>
-                    </li>
-                    <li>
-                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-table"></i>
+                        <a href="{{ route('subscribers.index') }}"><i class="sidebar-item-icon fa fa-table"></i>
                             <span class="nav-label">{{ (__('trans.Subscribers')) }}</span><i class="fa fa-angle-left arrow"></i></a>
                     </li>
                     <!-- <li>

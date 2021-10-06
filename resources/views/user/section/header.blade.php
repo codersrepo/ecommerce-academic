@@ -10,10 +10,6 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							{{ (__('trans.Help & FAQs')) }}
-						</a>
-
                      @auth
                         <a href="" class="flex-c-m trans-04 p-lr-25">
                             {{ auth()->user()->name }}
@@ -50,7 +46,7 @@
 
 					<!-- Logo desktop -->
 					<a href="/" class="logo">
-						<img src="{{ asset('images/icons/logo-01.png') }}" alt="IMG-LOGO">
+						<img src="{{ asset('images/logo-01.png') }}" alt="IMG-LOGO">
 					</a>
 
 					<!-- Menu desktop -->
@@ -64,9 +60,9 @@
 								<a href="{{ route('front.shop.index') }}">{{ (__('trans.Shop')) }}</a>
 							</li>
 
-							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">{{ (__('trans.Featured')) }}</a>
-							</li>
+							<!-- <li class="label1" data-label1="hot">
+								<a href="shoping-cart.html">{{ (__('trans.Categories')) }}</a>
+							</li> -->
 
 							<li>
 								<a href="{{ route('front.blogs.index') }}">{{ (__('trans.blog')) }}</a>
@@ -91,8 +87,9 @@
 						</div> -->
 
 						<div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart">
-								<i class="zmdi zmdi-shopping-cart"></i>
+							<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11">
+								<a href="{{ route('front.cart')}}">
+								<i class="zmdi zmdi-shopping-cart"></i> </a>
 							</div>
 						</div>
 

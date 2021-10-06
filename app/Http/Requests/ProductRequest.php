@@ -39,7 +39,6 @@ class ProductRequest extends FormRequest
             'size' => ['required','string'],
             'colour' => ['required','string'],
             'price' => ['required','integer'],
-            'image_id' => ['required']
         ]);
     }
 

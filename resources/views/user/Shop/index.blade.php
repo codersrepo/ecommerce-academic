@@ -13,10 +13,8 @@
                     All Products
                 </button>
 
-                @foreach ($category as $category_data )
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-                    {{ $category_data->firstTranslation()->title }}
-                </button>
+                @foreach ($category as $category)
+                <a href="{{ route('front.shop.index', [ 'category' => $category->slug]) }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">{{ $category->firstTranslation()->title }}</a>
                 @endforeach
             </div>
 
@@ -56,7 +54,7 @@
                 <!-- Block2 -->
                 <div class="block2">
                     <div class="block2-pic hov-img0">
-                        <img src="{{ asset('images/product_images/icons/'.$cat_data->image_icon) }}" alt="IMG-PRODUCT">
+                        <img src="{{ asset('images/product_images/icons/'.$cat_data->image_icon) }}" alt="IMG-PRODUCT" style="height:350px;width:350px">
                     </div>
 
                     <div class="block2-txt flex-w flex-t p-t-14">
@@ -71,8 +69,6 @@
 
                         <div class="block2-txt-child2 flex-r p-t-3">
                             <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="{{ asset('images/icons/icon-heart-01.png') }}" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{ asset('images/icons/icon-heart-02.png') }}" alt="ICON">
                             </a>
                         </div>
                     </div>

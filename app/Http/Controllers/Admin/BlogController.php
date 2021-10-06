@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Language;
 use App\Http\Requests\BlogRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateBlogRequest;
 
 class BlogController extends Controller
 {
@@ -95,9 +96,14 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Blog $blog)
     {
-        //
+        return view('admin.blog.form', [
+            'blog' => $blog->load('translations'),
+            'languages' => Language::get(['language as title', 'prefix', 'id'])
+
+        ]);
+
     }
 
     /**
@@ -107,9 +113,31 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        //
+        $data = $request->validated();
+        if($request->hasFile('image')){
+            $randomize = rand(10,500);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $randomize.'.'.$extension;
+            $image = $request->file('image')->move('images/blogs',$filename);
+            $data['image'] = $filename;
+        }
+
+
+        // $data['image'] ??= $category->image;
+
+        if ($blog->update($data)) {
+            $blog->translations()->delete();
+
+            $blogTrans = $this->prepareBlogTrans($data);
+
+            $blog->translations()->createMany($blogTrans);
+            return redirect()->route('blog.index')->with('sweet_success','Data added Successfully');
+        } else {
+                return redirect()->route('blog.index')->with('sweet_error','Data couldnot be added');
+        }
+
     }
 
     /**

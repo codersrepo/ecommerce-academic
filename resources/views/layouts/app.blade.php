@@ -15,11 +15,11 @@
     @if(session()->has('sweet_success') || session()->has('sweet_error'))
 <script>
     @if(session()->has('sweet_success'))
-    app.showSuccessMessage("Successfull", "{{ session('sweet_success') }}")
+    admin.showSuccessMessage("Successfull", "{{ session('sweet_success') }}")
      @endif
 
      @if(session()->has('sweet_error'))
-    app.showErrorMessage("Sorry!", "{{ session('sweet_error') }}")
+    admin.showErrorMessage("Sorry!", "{{ session('sweet_error') }}")
      @endif
 </script>
 @endif

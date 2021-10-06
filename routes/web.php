@@ -31,14 +31,12 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     Route::post('login','AdminLoginController@login')->name('admin.login');
     Route::group(['middleware' => ['admin','lang','bindings']],function(){
         Route::get('/lang/{lang}', "SwitchLanguageController")->name('switch-lang');
-        Route::get('/',function(){
-           return view('admin.dashboard');
-        });
+        Route::get('/', "DashboardController")->name('dashboard');
         Route::get('logout','AdminLoginController@logout')->name('admin.logout');
         Route::resource('/slider','SliderController');
         Route::resource('/category','CategoryController');
         Route::post('updateCategoryStatus','CategoryController@togglestatus')->name('updateCategoryStatus');
-
+        Route::get('subscribers', 'SubscriberController')->name('subscribers.index');
         Route::resource('/blog','BlogController');
 
         Route::resource('/facilities', 'FacilityController')->except('show');

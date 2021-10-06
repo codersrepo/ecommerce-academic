@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SendProductAddedMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductTranslation;
@@ -39,6 +40,12 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class,'product_id', 'id');
     }
+
+    public function sendSubscribersNotification()
+    {
+        dispatch(new SendProductAddedMail($this));
+    }
+
 
 
     protected $casts = [

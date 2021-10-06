@@ -149,7 +149,7 @@
                                         <div id="lang_{{ $lang->prefix }}" data-lang="{{ $lang->prefix }}"
                                             class="lang-tab {{ $lang->prefix === 'en' ? 'active-form' : 'd-none' }}">
                                             <div class="form-group row">
-                                                {{ Form::label('title_'.$lang->prefix, __('trans.title') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'title']) }}
+                                            <label for="" class="col-sm-12 col-md-3">Title</label>
                                                 <div class="col-sm-12 col-md-9">
 
                                                     {{ Form::text('title_'.$lang->prefix, $product->getFromTranslations('title', $lang->id), ['class'=>'form-control form-control-sm','id'=>'title_'.$lang->prefix,'required'=>true]) }}
@@ -160,7 +160,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                {{ Form::label('summary_'.$lang->prefix, __('trans.summary') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'summary']) }}
+                                            <label for="" class="col-sm-12 col-md-3">Sumary</label>
                                                 <div class="col-sm-12 col-md-9">
                                                     {{ Form::textarea('summary_'.$lang->prefix, $product->getFromTranslations('summary', $lang->id), ['name' => 'summary_'.$lang->prefix, 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
                                                     @error('summary_'.$lang->prefix)
@@ -170,7 +170,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                {{ Form::label('description_'.$lang->prefix, __('trans.description') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'description']) }}
+                                            <label for="" class="col-sm-12 col-md-3">Description</label>
                                                 <div class="col-sm-12 col-md-9">
                                                     {{ Form::textarea('description_'.$lang->prefix, $product->getFromTranslations('description', $lang->id), ['name' => 'description_'.$lang->prefix, 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
                                                     @error('description_'.$lang->prefix)
@@ -183,7 +183,7 @@
                                         @endforeach
 
                                         <div class="form-group row">
-                                                {{ Form::label('price', __('trans.price').":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'price']) }}
+                                        <label for="" class="col-sm-12 col-md-3">Price</label>
                                                 <div class="col-sm-12 col-md-9">
                                                     {{ Form::text('price', @$product->price, ['name' => 'price', 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
                                                     @error('price')
@@ -193,7 +193,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                {{ Form::label('product_code', __('trans.product_code').":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'product_code']) }}
+                                            <label for="" class="col-sm-12 col-md-3">Product Code</label>
                                                 <div class="col-sm-12 col-md-9">
                                                     {{ Form::text('product_code', @$product->product_code, ['name' => 'product_code', 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
                                                     @error('product_code')
@@ -203,7 +203,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                            {{ Form::label('category', __('trans.category.title').":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'category']) }}
+                                            <label for="" class="col-sm-12 col-md-3">Category</label>
                                             <div class="col-sm-12 col-md-9">
                                                 <select name="category" id="category"
                                                     class="form-control form-control-sm" required>
@@ -222,7 +222,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                                <label class="col-sm-12 col-md-3">Product Size:</label>
+                                        <label for="" class="col-sm-12 col-md-3">Product Size</label>
                                                 <div class="col-sm-12 col-md-9">
                                                 <select class="form-control form-control-sm" required="required" name="size" class="js-select2">
                                                     <option value="" disabled>Choose an option</option>
@@ -250,7 +250,7 @@
                                             </div>
 
                                         <div class="form-group row">
-                                            {{ Form::label('status', __('trans.status').":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'status']) }}
+                                        <label for="" class="col-sm-12 col-md-3">Status</label>
                                             <div class="col-sm-12 col-md-9">
                                                 {{ Form::select('status',['active'=>__('trans.active'), 'inactive'=>__('trans.inactive')], $product->status, ['class'=>'form-control form-control-sm', 'id'=>'status','required'=>true]) }}
                                                 @error('status')
@@ -260,23 +260,20 @@
                                         </div>
 
                                         <div class="form-group row">
-                                                {{ Form::label('image_icon','Image Icon',['class'=>'col-sm-3'])}}
-                                                    <div class="col-sm-4">
-                                                        {{Form::file('image_icon',['id'=>'image_icon','required'=>(isset($data) ? false : true),'accept'=>'image/*'] ) }}
-                                                        @error('image_icon')
-                                                        <span class="alert-danger">{{$message}}  </span>
-                                                        @enderror
-                                                    </div>
+                                        <label for="" class="col-sm-12 col-md-3">Image Icon</label>
+                                            <div class="col-sm-4">
+                                                <input type="file" name="image_icon" id="image_icon" value="{{ old('image_icon') ?? $product->image_icon }}">
+                                                @error('image_icon')
+                                                <span class="alert-danger">{{$message}}  </span>
+                                                @enderror
                                             </div>
-                                            <div class="form-group row">
-                                                {{ Form::label('images[]','Image',['class'=>'col-sm-3'])}}
-                                                    <div class="col-sm-4">
-                                                        {{Form::file('image_id[]',['id'=>'image_id[]','required'=>(isset($data) ? false : true),'accept'=>'image/*','multiple' => true] ) }}
-                                                        @error('image_id')
-                                                        <span class="alert-danger">{{$message}}  </span>
-                                                        @enderror
-                                                    </div>
+                                            <div id="holder1" class="col-sm-12 col-md-5">
+                                                @if($product->id)
+                                                <img  style="max-width: 150px" src="{{ asset('images/product_images/icons/'.$product->image_icon) }}" alt="product_image">
+                                                @endif
                                             </div>
+                                        </div>
+                                    </div>
                                     </div>
                                         <div class="form-group row">
                                             <div class="col-sm-12 col-md-9 offset-md-3">

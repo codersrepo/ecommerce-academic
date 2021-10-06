@@ -11,6 +11,7 @@ use App\Models\ProductImages;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductImage;
 use Intervention\Image\Facades\Image;
 
@@ -34,7 +35,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data =$this->product->latest()->with([
+        $data = $this->product->latest()->with([
             'translations' => function ($q) {
                 $q->where('language_id', session('language_id'));
             },
@@ -72,7 +73,7 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         // dd($data);
-        
+
         $data['slug'] = $this->prepareSlug($data['title_en']);
         $data['category_id']  = $data['category'];
 
@@ -92,7 +93,7 @@ class ProductController extends Controller
 
             $product->translations()->createMany($productTrans);
 
-            // $product->sendSubscribersNotification();
+            $product->sendSubscribersNotification();
         }
         if ($request->hasFile('image_id')) {
             $images = $request->file('image_id');
@@ -114,14 +115,9 @@ class ProductController extends Controller
                     'images' => $image_name,
                     'product_id' => $product['id']
                 ]);
-                if($status){
-                    print "done";
-                } else {
-                    print "not";
-                }
             }
-            return redirect()->route('product.index')->with('sweet_success', 'Data added Successfully');
         }
+        return redirect()->route('product.index')->with('sweet_success', 'Data added Successfully');
     }
 
     /**
@@ -141,9 +137,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('admin.product.form', [
+            'product' => $product->load(['translations']),
+            'categories' => Category::active()->with(['translations'])->get(),
+            'languages' => Language::get(['language as title', 'prefix', 'id'])
+        ]);
     }
 
     /**
@@ -153,9 +153,29 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $data = $request->validated();
+        // $data['is_featured'] = isset($data['is_featured']) ?
+        // ($data['is_featured'] === "on" ? true : false)
+        // : false;
+        if ($request->hasFile('image_icon')) {
+            $randomize = rand(10, 500);
+            $extension = $request->file('image_icon')->getClientOriginalExtension();
+            $filename = $randomize . '.' . $extension;
+            $image = $request->file('image_icon')->move('images/products/', $filename);
+            $data['image_icon'] = $filename;
+        }
+            if ($product->update($data)) {
+                $product->translations()->delete();
+
+                $productTrans = $this->prepareProductTrans($data);
+
+                $product->translations()->createMany($productTrans);
+            return redirect()->route('product.index')->with('sweet_success', 'Data updated Successfully');
+        } else {
+            return redirect()->route('product.index')->with('sweet_error', 'Data couldnot be updated');
+        }
     }
 
     /**

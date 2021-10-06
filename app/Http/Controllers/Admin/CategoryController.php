@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Language;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -136,9 +137,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.category.form', [
+            'category' => $category->load('translations'),
+            'languages' => Language::get(['language as title', 'prefix', 'id'])
+
+        ]);
+
     }
 
     /**
@@ -148,9 +154,30 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $data = $request->validated();
+        if($request->hasFile('image')){
+            $randomize = rand(10,500);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $randomize.'.'.$extension;
+            $image = $request->file('image')->move('images/categories',$filename);
+            $data['image'] = $filename;
+        }
+
+
+        // $data['image'] ??= $category->image;
+
+        if ($category->update($data)) {
+            $category->translations()->delete();
+
+            $categoryTrans = $this->prepareCategoryTrans($data);
+
+            $category->translations()->createMany($categoryTrans);
+            return redirect()->route('category.index')->with('sweet_success','Data added Successfully');
+        } else {
+                return redirect()->route('category.index')->with('sweet_error','Data couldnot be added');
+        }
     }
 
     /**

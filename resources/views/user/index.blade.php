@@ -44,7 +44,8 @@
 				<!-- Block1 -->
 				<div class="block1 wrap-pic-w">
 					<img src="{{ asset('images/categories/'.$category_data->image) }}" style="height:300px; width:300px;width: 100%" alt="IMG-BANNER">
-					<a href=" {{ url('/product') }} " class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+					<a href="{{ route('front.shop.index', [ 'category' => $category_data->slug]) }}"
+ " class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
 						<div class="block1-txt-child1 flex-col-l">
 							<span class="block1-name ltext-102 trans-04 p-b-8">
 								{{ $category_data->firstTranslation()->title }}
@@ -82,17 +83,16 @@
 			<!-- Nav tabs -->
 			@if($product)
 			@foreach ($product as $product_data)
-
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="{{ asset('images/product_images/icons/'.$product_data->image_icon) }}" alt="IMG-PRODUCT">
+						<img src="{{ asset('images/product_images/icons/'.$product_data->image_icon) }}" alt="IMG-PRODUCT" style="height:350px;width:350px">
 					</div>
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="{{ route('front.shop.show', [ 'slug' => $product_data->slug]) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="{{ route('front.shop.show',$product_data->slug) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								{{ $product_data->firstTranslation()->title }}
 							</a>
 
@@ -103,8 +103,6 @@
 
 						<div class="block2-txt-child2 flex-r p-t-3">
 							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 							</a>
 						</div>
 					</div>
@@ -149,7 +147,7 @@
 								</span>
 
 								<span class="cl5">
-									Nancy Ward
+									Admin
 								</span>
 							</span>
 
@@ -159,13 +157,13 @@
 								</span>
 
 								<span class="cl5">
-									<!-- {{ $blog_data->created_at }} -->
+									{{ $blog_data->created_at }}
 								</span>
 							</span>
 						</div>
 
 						<h4 class="p-b-12">
-							<a href="{{ route('blog.index') }}" class="mtext-101 cl2 hov-cl1 trans-04">
+							<a href=" {{ route('front.blogs.show',$blog_data->slug) }} " class="mtext-101 cl2 hov-cl1 trans-04">
 								{{ $blog_data->firstTranslation()->title }}
 							</a>
 						</h4>

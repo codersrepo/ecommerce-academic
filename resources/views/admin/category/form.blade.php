@@ -20,15 +20,22 @@
     function getFormTrans() {
         let trans = [];
         @php
-        $actualLocale = app()->getLocale();
+        $actualLocale = app() - > getLocale();
         @endphp
 
-        @foreach ($languages as $lang)
-        {{ app()->setLocale($lang->prefix) }}
+        @foreach($languages as $lang) {
+            {
+                app() - > setLocale($lang - > prefix)
+            }
+        }
         trans['{{ $lang->prefix }}'] = @json(__("trans.form"));
         @endforeach
 
-        {{ app()->setLocale($actualLocale) }}
+        {
+            {
+                app() - > setLocale($actualLocale)
+            }
+        }
 
         return trans;
     }
@@ -131,64 +138,62 @@
                             @endif
                             @csrf
                             <div class="tab-pane fade show active" id="main-form" role="tabpanel">
-                            @foreach ($languages as $lang)
-                                        <div id="lang_{{ $lang->prefix }}" data-lang="{{ $lang->prefix }}"
-                                            class="lang-tab {{ $lang->prefix === 'en' ? 'active-form' : 'd-none' }}">
-                                            <div class="form-group row">
-                                                {{ Form::label('title_'.$lang->prefix, __('trans.title') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'title']) }}
-                                                <div class="col-sm-12 col-md-9">
+                                @foreach ($languages as $lang)
+                                <div id="lang_{{ $lang->prefix }}" data-lang="{{ $lang->prefix }}" class="lang-tab {{ $lang->prefix === 'en' ? 'active-form' : 'd-none' }}">
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-12 col-md-3 ">Title</label>
+                                        <div class="col-sm-12 col-md-9">
 
-                                                    {{ Form::text('title_'.$lang->prefix, $category->getFromTranslations('title', $lang->id), ['class'=>'form-control form-control-sm','id'=>'title_'.$lang->prefix,'required'=>true]) }}
+                                            {{ Form::text('title_'.$lang->prefix, $category->getFromTranslations('title', $lang->id), ['class'=>'form-control form-control-sm','id'=>'title_'.$lang->prefix,'required'=>true]) }}
 
-                                                    @error('title_'.$lang->prefix)
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                {{ Form::label('summary_'.$lang->prefix, __('trans.summary') . ":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'summary']) }}
-                                                <div class="col-sm-12 col-md-9">
-                                                    {{ Form::textarea('summary_'.$lang->prefix, $category->getFromTranslations('summary', $lang->id), ['name' => 'summary_'.$lang->prefix, 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
-                                                    @error('summary_'.$lang->prefix)
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endforeach
-
-                                        <div class="form-group row">
-                                            {{ Form::label('status', __('trans.status').":", ['class'=>'col-sm-12 col-md-3 required', 'data-text'=>'status']) }}
-                                            <div class="col-sm-12 col-md-9">
-                                                {{ Form::select('status',['active'=>__('trans.active'), 'inactive'=>__('trans.inactive')], $category->status, ['class'=>'form-control form-control-sm', 'id'=>'status','required'=>true]) }}
-                                                @error('status')
-                                                <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            {{ Form::label('image', __('trans.image').":", ['class' => 'col-sm-12 col-md-3 required', 'data-text'=>'image']) }}
-                                            <div class="col-sm-4">
-                                                {{Form::file('image',['id'=>'image','required'=>(isset($data) ? false : true),'accept'=>'image/*'] ) }}
-                                                @error('image')
-                                                <span class="alert-danger">{{$message}}  </span>
-                                                @enderror
-                                            </div>
-                                            <div id="holder1" class="col-sm-12 col-md-5">
-                                                @if($category->id)
-                                                <img src="{{ $category->image }}" class="thumbnail_image"
-                                                    alt="{{ $category->title }}">
-                                                @endif
-                                            </div>
+                                            @error('title_'.$lang->prefix)
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-12 col-md-9 offset-md-3">
-                                                {{ Form::button("<i class='fa fa-times'></i> ".__('trans.cancelButton'), ['class' => 'btn btn-danger btn-sm', 'type'=>'reset']) }}
-                                                {{ Form::button("<i class='fa fa-paper-plane'></i> ".__('trans.submitButton'), ['class' => 'btn btn-success btn-sm', 'id'=>'form-submit']) }}
-                                            </div>
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-12 col-md-3 ">Summary</label>
+                                        <div class="col-sm-12 col-md-9">
+                                            {{ Form::textarea('summary_'.$lang->prefix, $category->getFromTranslations('summary', $lang->id), ['name' => 'summary_'.$lang->prefix, 'required' => true, 'class'=>'form-control form-control-sm','rows' => '4']) }}
+                                            @error('summary_'.$lang->prefix)
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
+                                    </div>
+                                </div>
+                                @endforeach
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-12 col-md-3">Status</label>
+                                    <div class="col-sm-12 col-md-9">
+                                        {{ Form::select('status',['active'=>__('trans.active'), 'inactive'=>__('trans.inactive')], $category->status, ['class'=>'form-control form-control-sm', 'id'=>'status','required'=>true]) }}
+                                        @error('status')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="" class="col-sm-12 col-md-3">Image</label>
+                                    <div class="col-sm-4">
+                                        <input type="file" name="image" id="image" value="{{ old('image') ?? $category->image }}">
+                                        @error('image')
+                                        <span class="alert-danger">{{$message}} </span>
+                                        @enderror
+                                    </div>
+                                    <div id="holder1" class="col-sm-12 col-md-5">
+                                        @if($category->id)
+                                        <img style="max-width: 150px" src="{{ asset('images/categories/'.$category->image) }}" alt="Category_image">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-md-9 offset-md-3">
+                                    {{ Form::button("<i class='fa fa-times'></i> ".__('trans.cancelButton'), ['class' => 'btn btn-danger btn-sm', 'type'=>'reset']) }}
+                                    {{ Form::button("<i class='fa fa-paper-plane'></i> ".__('trans.submitButton'), ['class' => 'btn btn-success btn-sm', 'id'=>'form-submit']) }}
+                                </div>
+                            </div>
                         </form>
                 </div>
             </div>

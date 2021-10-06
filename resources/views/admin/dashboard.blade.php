@@ -22,80 +22,36 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>{{ (__('trans.Order ID')) }}</th>
-                                            <th>{{ (__('trans.Customer')) }}</th>
-                                            <th>{{ (__('trans.Amount')) }}</th>
+                                            <th>{{ (__('trans.Product Code')) }}</th>
+                                            <th>{{ (__('trans.Customer Email')) }}</th>
+                                            <th>{{ (__('trans.Location')) }}</th>
                                             <th>{{ (__('trans.Status')) }}</th>
                                             <th width="91px">{{ (__('trans.Date')) }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($orders as $order)
                                         <tr>
                                             <td>
-                                                <a href="invoice.html">AT2584</a>
+                                                <a href="{{ route('front.shop.show',$order->cart->product->slug) }}"> {{ $order->cart->product->product_code }}</a>
                                             </td>
-                                            <td>@Jack</td>
-                                            <td>$564.00</td>
+                                            <td>{{ $order->user->email }}</td>
+                                            <td>{{ $order->address }}</td>
                                             <td>
-                                                <span class="badge badge-success">Shipped</span>
-                                            </td>
-                                            <td>10/07/2017</td>
+                                            @if($order->status == 'new')
+                                                 <a class="updateOrderStatus badge badge-success" id="order-{{ $order->id }}" order_id = {{ $order->id }} href="javascript:void(0)">
+                                            New </a>
+                                            @else
+                                            <a class="updateOrderStatus badge badge-danger" id="order-{{ $order->id }}" order_id = {{ $order->id }}  href="javascript:void(0)">
+                                               Delivered </a>
+                                                @endif
+                                            </span></td>
+
+                                                <!-- <span class="badge badge-success">{{ $order->status }}</</span> -->
+                                            <!-- </td> -->
+                                            <td>{{ $order->created_at ->toDateString()}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="invoice.html">AT2575</a>
-                                            </td>
-                                            <td>@Amalia</td>
-                                            <td>$220.60</td>
-                                            <td>
-                                                <span class="badge badge-success">Shipped</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="invoice.html">AT1204</a>
-                                            </td>
-                                            <td>@Emma</td>
-                                            <td>$760.00</td>
-                                            <td>
-                                                <span class="badge badge-default">Pending</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="invoice.html">AT7578</a>
-                                            </td>
-                                            <td>@James</td>
-                                            <td>$87.60</td>
-                                            <td>
-                                                <span class="badge badge-warning">Expired</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="invoice.html">AT0158</a>
-                                            </td>
-                                            <td>@Ava</td>
-                                            <td>$430.50</td>
-                                            <td>
-                                                <span class="badge badge-default">Pending</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="invoice.html">AT0127</a>
-                                            </td>
-                                            <td>@Noah</td>
-                                            <td>$64.00</td>
-                                            <td>
-                                                <span class="badge badge-success">Shipped</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -132,3 +88,29 @@
 
 
 @endsection
+
+@section('script')
+<script>
+    $(".updateOrderStatus").click(function(){
+    var status = $(this).text();
+    var order_id = $(this).attr("order_id");
+    $.ajax({
+        type:'post',
+        url:'{{ route("front.updateOrderStatus") }}',
+        data:{status:status,order_id:order_id,
+            "_token": "{{ csrf_token() }}",
+        },
+        success:function(resp){
+            if(resp['status'] == 'new'){
+                $("#order-"+order_id).html("<a class='updateOrderStatus badge badge-success' href='javascript:void(0)'>New </a>");
+            } else if(resp['status'] == 'delivered'){
+                $("#order-"+order_id).html("<a class='updateOrderStatus badge badge-danger' href='javascript:void(0)'>Delivered </a>");
+            }
+        },error:function(){
+            alert("Error");
+        }
+    });
+    });
+</script>
+@endsection
+

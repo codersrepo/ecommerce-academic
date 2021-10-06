@@ -15,7 +15,7 @@ return[
     'Store Overview' => 'Store Overview',
     'Product Overview' => 'Product Overview',
     'Load More' => 'Load More',
-    'Our Blogs' => 'Hamro Blogs',
+    'Our Blogs' => 'Our Blog',
     'Latest Orders' => 'Latest Orders',
     'Order ID' => 'Order ID',
     'Customer' => 'Customer',
@@ -87,6 +87,8 @@ return[
     NCIT, Kathmandu',
     'Lets Talk' => 'Lets Talk',
     'Sale Support' => 'Sale Support',
+    'cancelButton'=> 'Cancel',
+    'submitButton' => 'Submit',
 
     //About us translations
     'About_data' => 'Productsporium is an e-commerce website which helps people to search and buy products on the internet. E-commerce allows for a convenient way of shopping online. Unlike in offline stores, where customers need to personally travel and check products, our project allows customers the benefits of shopping in the comfort of their own homes.  

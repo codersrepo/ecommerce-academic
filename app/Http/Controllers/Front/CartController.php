@@ -37,7 +37,7 @@ class CartController extends Controller
     public function cart()
     {
         if(Auth::check()){
-            $userCartItem = Cart::with(['product.translations'])->where('user_id',Auth::user()->id)->get();
+            $userCartItem = Cart::active()->with(['product.translations'])->where('user_id',Auth::user()->id)->get();
             return view('user.cart.cart')->with('cart_data', $userCartItem);
         }
     }
@@ -50,6 +50,7 @@ class CartController extends Controller
         }
     }
 
+    
 
 
         public function update(Request $request, $id){
@@ -58,9 +59,7 @@ class CartController extends Controller
 
         public function destroy($id)
         {
-            dd($id);
             $data = Cart::FindOrFail($id);
-            dd($data);
             if($data){
                 $data->delete();
                 return redirect()->route('front.cart')->with('sweet_success','Product removed from cart');

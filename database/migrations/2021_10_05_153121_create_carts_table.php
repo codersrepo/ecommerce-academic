@@ -20,8 +20,9 @@ class CreateCartsTable extends Migration
             $table->string('colour');
             $table->foreignId('user_id')->nullable()->constrained('users','id')->onDelete('SET NULL')->onUpdate('CASCADE');
             $table->foreignId('product_id')->nullable()->constrained('products','id')->onDelete('SET NULL')->onUpdate('CASCADE');
+            $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();       
-         });
+        });
     }
 
     /**

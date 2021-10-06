@@ -50,7 +50,7 @@ class HomeController extends Controller
             ->with(['translations' => function ($q) {
                 $q->correctTranslation()->select(['title', 'blog_id']);
             }])
-            ->take(8)
+            ->take(3)
             ->get();
 
         return view('user.index', compact(['category', 'blog', 'slider','product']));
