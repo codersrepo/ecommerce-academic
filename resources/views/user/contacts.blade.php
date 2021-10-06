@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url({{ asset('images/contact.jpg') }});">
-		<h2 class="ltext-105 cl0 txt-center">
-		{{ (__('trans.Contact')) }}
-		</h2>
-	</section>	
-	<!-- Content page -->
 	<section class="bg0 p-t-104 p-b-116">
 		<div class="container">
 			<div class="flex-w flex-tr">

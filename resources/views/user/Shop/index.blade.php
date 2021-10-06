@@ -10,7 +10,7 @@
 				</button> -->
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                    All Products
+                    {{ (__('trans.All Products')) }}
                 </button>
 
                 @foreach ($category as $category)
@@ -22,7 +22,7 @@
                 <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                     <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                     <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                    Search
+                    {{ (__('trans.Search')) }}
                 </div>
             </div>
 
@@ -75,14 +75,14 @@
                 </div>
             </div>
             @empty
-            No products available
+            {{ (__('trans.No products available')) }}
             @endforelse
 
         </div>
         <!-- Load more -->
         <div class="flex-c-m flex-w w-full p-t-45">
             <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                Load More
+            {{ (__('trans.Load More')) }}
             </a>
         </div>
     </div>
